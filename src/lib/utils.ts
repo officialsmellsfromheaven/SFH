@@ -29,6 +29,6 @@ export function slugify(str: string): string {
 }
 
 export function getCollectionImagePath(name: string): string {
-  const slug = slugify(name);
-  return `/collections/${slug}.png`;
+  const fileName = name.trim().replace(/\s+/g, "-");
+  return `/collections/${fileName}.png`;
 }
