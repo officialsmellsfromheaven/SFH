@@ -1,0 +1,23 @@
+{
+  "id": "chanel-bleu-de-chanel",
+  "slug": "chanel-bleu-de-chanel",
+  "name": "Bleu de Chanel",
+  "brand": "Chanel",
+  "gender": "men",
+  "fragranceFamily": "woody aromatic",
+  "mainAccords": [
+    "citrus",
+    "woody",
+    "fresh spicy",
+    "aromatic",
+    "amber",
+    "smoky",
+    "balsamic",
+    "warm spicy",
+    "green"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Chanel/Bleu-de-Chanel-9099.html",
+  "images": [
+    "/products/chanel-bleu-de-chanel/1.avif"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "faberge-brut",
+  "slug": "faberge-brut",
+  "name": "Brut",
+  "brand": "Faberge",
+  "gender": "men",
+  "fragranceFamily": "Aromatic Spicy",
+  "mainAccords": [
+    "aromatic",
+    "fresh spicy",
+    "woody",
+    "citrus",
+    "earthy",
+    "lavender",
+    "sweet",
+    "vanilla",
+    "mossy"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Faberge/Brut-38206.html",
+  "images": [
+    "/products/faberge-brut/1.avif"
+  ]
+}

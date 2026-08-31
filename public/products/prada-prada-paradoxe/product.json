@@ -1,0 +1,22 @@
+{
+  "id": "prada-prada-paradoxe",
+  "slug": "prada-prada-paradoxe",
+  "name": "Prada Paradoxe",
+  "brand": "Prada",
+  "gender": "women",
+  "fragranceFamily": "Oriental Floral",
+  "mainAccords": [
+    "white floral",
+    "citrus",
+    "amber",
+    "sweet",
+    "vanilla",
+    "powdery",
+    "fruity",
+    "musky"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Prada/Prada-Paradoxe-75668.html",
+  "images": [
+    "/products/prada-prada-paradoxe/1.avif"
+  ]
+}

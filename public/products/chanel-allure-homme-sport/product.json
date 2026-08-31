@@ -1,0 +1,23 @@
+{
+  "id": "chanel-allure-homme-sport",
+  "slug": "chanel-allure-homme-sport",
+  "name": "Allure Homme Sport",
+  "brand": "Chanel",
+  "gender": "men",
+  "fragranceFamily": "Woody Spicy",
+  "mainAccords": [
+    "citrus",
+    "aromatic",
+    "vanilla",
+    "aldehydic",
+    "marine",
+    "sweet",
+    "fresh spicy",
+    "amber",
+    "powdery"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Chanel/Allure-Homme-Sport-607.html",
+  "images": [
+    "/products/chanel-allure-homme-sport/1.avif"
+  ]
+}

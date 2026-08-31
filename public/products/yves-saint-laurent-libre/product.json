@@ -1,0 +1,24 @@
+{
+  "id": "yves-saint-laurent-libre",
+  "slug": "yves-saint-laurent-libre",
+  "name": "Libre",
+  "brand": "Yves Saint Laurent",
+  "gender": "women",
+  "fragranceFamily": "Oriental Fougere",
+  "mainAccords": [
+    "white floral",
+    "citrus",
+    "lavender",
+    "vanilla",
+    "aromatic",
+    "sweet",
+    "powdery",
+    "animalic",
+    "musky",
+    "woody"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/Libre-56077.html",
+  "images": [
+    "/products/yves-saint-laurent-libre/1.avif"
+  ]
+}

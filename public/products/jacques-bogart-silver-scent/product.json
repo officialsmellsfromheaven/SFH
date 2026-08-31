@@ -1,0 +1,23 @@
+{
+  "id": "jacques-bogart-silver-scent",
+  "slug": "jacques-bogart-silver-scent",
+  "name": "Silver Scent",
+  "brand": "Jacques Bogart",
+  "gender": "men",
+  "fragranceFamily": "Oriental Woody",
+  "mainAccords": [
+    "aromatic",
+    "citrus",
+    "fresh spicy",
+    "white floral",
+    "fruity",
+    "tropical",
+    "lavender",
+    "warm spicy",
+    "sweet"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Jacques-Bogart/Silver-Scent-7794.html",
+  "images": [
+    "/products/jacques-bogart-silver-scent/1.avif"
+  ]
+}

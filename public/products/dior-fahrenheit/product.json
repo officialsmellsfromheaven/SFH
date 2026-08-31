@@ -1,0 +1,24 @@
+{
+  "id": "dior-fahrenheit",
+  "slug": "dior-fahrenheit",
+  "name": "Fahrenheit",
+  "brand": "Dior",
+  "gender": "men",
+  "fragranceFamily": "Aromatic Fougere",
+  "mainAccords": [
+    "leather",
+    "woody",
+    "ozonic",
+    "fresh spicy",
+    "aromatic",
+    "animalic",
+    "aquatic",
+    "floral",
+    "citrus",
+    "green"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Dior/Fahrenheit-228.html",
+  "images": [
+    "/products/dior-fahrenheit/1.avif"
+  ]
+}

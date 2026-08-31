@@ -1,0 +1,22 @@
+{
+  "id": "carolina-herrera-good-girl",
+  "slug": "carolina-herrera-good-girl",
+  "name": "Good Girl",
+  "brand": "Carolina Herrera",
+  "gender": "women",
+  "fragranceFamily": "Oriental Floral",
+  "mainAccords": [
+    "sweet",
+    "white floral",
+    "warm spicy",
+    "vanilla",
+    "amber",
+    "woody",
+    "tuberose",
+    "powdery"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Carolina-Herrera/Good-Girl-39681.html",
+  "images": [
+    "/products/carolina-herrera-good-girl/1.avif"
+  ]
+}

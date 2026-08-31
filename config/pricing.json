@@ -1,0 +1,9 @@
+{
+  "defaultSingleProductPricing": {
+    "20ml": 299,
+    "30ml": 399,
+    "50ml": 599,
+    "100ml": 1199
+  },
+  "defaultSingleProductSizeOrder": ["20ml", "30ml", "50ml", "100ml"]
+}

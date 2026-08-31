@@ -1,0 +1,20 @@
+{
+  "id": "giorgio-armani-acqua-di-gio",
+  "slug": "giorgio-armani-acqua-di-gio",
+  "name": "Acqua di Gio",
+  "brand": "Giorgio Armani",
+  "gender": "men",
+  "fragranceFamily": "Aromatic Aquatic",
+  "mainAccords": [
+    "citrus",
+    "aromatic",
+    "marine",
+    "fresh spicy",
+    "floral",
+    "woody"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Giorgio-Armani/Acqua-di-Gio-410.html",
+  "images": [
+    "/products/giorgio-armani-acqua-di-gio/1.avif"
+  ]
+}

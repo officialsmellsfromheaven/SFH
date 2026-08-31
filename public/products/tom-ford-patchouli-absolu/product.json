@@ -1,0 +1,23 @@
+{
+  "id": "tom-ford-patchouli-absolu",
+  "slug": "tom-ford-patchouli-absolu",
+  "name": "Patchouli Absolu",
+  "brand": "Tom Ford",
+  "gender": "women and men",
+  "fragranceFamily": "Woody",
+  "mainAccords": [
+    "woody",
+    "earthy",
+    "warm spicy",
+    "leather",
+    "fresh spicy",
+    "mossy",
+    "balsamic",
+    "aromatic",
+    "amber"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Tom-Ford/Patchouli-Absolu-28009.html",
+  "images": [
+    "/products/tom-ford-patchouli-absolu/1.avif"
+  ]
+}

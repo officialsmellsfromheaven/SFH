@@ -1,0 +1,23 @@
+{
+  "id": "azzaro-chrome",
+  "slug": "azzaro-chrome",
+  "name": "Chrome",
+  "brand": "Azzaro",
+  "gender": "men",
+  "fragranceFamily": "Citrus Aromatic",
+  "mainAccords": [
+    "citrus",
+    "aromatic",
+    "woody",
+    "fresh spicy",
+    "white floral",
+    "floral",
+    "sweet",
+    "powdery",
+    "musky"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Azzaro/Chrome-788.html",
+  "images": [
+    "/products/azzaro-chrome/1.avif"
+  ]
+}

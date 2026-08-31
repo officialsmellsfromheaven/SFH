@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "currency": "INR",
+  "pricing": {
+    "mode": "percentageBelowReference",
+    "targetPercentage": null,
+    "rounding": {
+      "mode": "none",
+      "value": null
+    }
+  },
+  "combos": [
+    {
+      "id": "combo-20ml",
+      "name": "Build Your 20ml Combo",
+      "bottleSize": 20,
+      "quantity": 10,
+      "eligibility": {
+        "mode": "allActiveProducts",
+        "productIds": []
+      },
+      "referencePricing": {
+        "mode": "sumOfSelectedProductPrices"
+      },
+      "pricingRule": {
+        "mode": "percentageBelowReference",
+        "targetPercentage": 3.0
+      },
+      "rounding": {
+        "mode": "none",
+        "value": null
+      },
+      "badge": "BEST VALUE",
+      "description": "Choose your favourite fragrances and build your own combo.",
+      "active": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "combo-30ml",
+      "name": "Build Your 30ml Combo",
+      "bottleSize": 30,
+      "quantity": 7,
+      "eligibility": {
+        "mode": "allActiveProducts",
+        "productIds": []
+      },
+      "referencePricing": {
+        "mode": "sumOfSelectedProductPrices"
+      },
+      "pricingRule": {
+        "mode": "percentageBelowReference",
+        "targetPercentage": 3.0
+      },
+      "rounding": {
+        "mode": "none",
+        "value": null
+      },
+      "badge": "BEST VALUE",
+      "description": "Choose your favourite fragrances and build your own combo",
+      "active": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "combo-50ml",
+      "name": "Build Your 50ml Combo",
+      "bottleSize": 50,
+      "quantity": 5,
+      "eligibility": {
+        "mode": "allActiveProducts",
+        "productIds": []
+      },
+      "referencePricing": {
+        "mode": "sumOfSelectedProductPrices"
+      },
+      "pricingRule": {
+        "mode": "percentageBelowReference",
+        "targetPercentage": 3.0
+      },
+      "rounding": {
+        "mode": "none",
+        "value": null
+      },
+      "badge": "BEST VALUE",
+      "description": "Choose your favourite fragrances and build your own combo",
+      "active": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "combo-100ml",
+      "name": "Build Your 100ml Combo",
+      "bottleSize": 100,
+      "quantity": 3,
+      "eligibility": {
+        "mode": "allActiveProducts",
+        "productIds": []
+      },
+      "referencePricing": {
+        "mode": "sumOfSelectedProductPrices"
+      },
+      "pricingRule": {
+        "mode": "percentageBelowReference",
+        "targetPercentage": 3.0
+      },
+      "rounding": {
+        "mode": "none",
+        "value": null
+      },
+      "badge": "BEST VALUE",
+      "description": "Choose your favourite fragrances and build your own combo",
+      "active": true,
+      "sortOrder": 1
+    }
+  ]
+}

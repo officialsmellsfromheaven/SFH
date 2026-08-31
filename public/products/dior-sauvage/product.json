@@ -1,0 +1,23 @@
+{
+  "id": "dior-sauvage",
+  "slug": "dior-sauvage",
+  "name": "Sauvage",
+  "brand": "Dior",
+  "gender": "men",
+  "fragranceFamily": "Aromatic Fougere",
+  "mainAccords": [
+    "fresh spicy",
+    "amber",
+    "citrus",
+    "aromatic",
+    "musky",
+    "woody",
+    "lavender",
+    "herbal",
+    "warm spicy"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Dior/Sauvage-31861.html",
+  "images": [
+    "/products/dior-sauvage/1.avif"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "creed-viking",
+  "slug": "creed-viking",
+  "name": "Viking",
+  "brand": "Creed",
+  "gender": "men",
+  "fragranceFamily": "Woody Aromatic",
+  "mainAccords": [
+    "aromatic",
+    "fresh spicy",
+    "green",
+    "citrus",
+    "lavender",
+    "woody",
+    "rose",
+    "musky",
+    "warm spicy"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Creed/Viking-41698.html",
+  "images": [
+    "/products/creed-viking/1.avif"
+  ]
+}

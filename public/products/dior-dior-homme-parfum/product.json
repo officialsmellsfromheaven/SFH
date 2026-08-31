@@ -1,0 +1,24 @@
+{
+  "id": "dior-dior-homme-parfum",
+  "slug": "dior-dior-homme-parfum",
+  "name": "Dior Homme Parfum",
+  "brand": "Dior",
+  "gender": "men",
+  "fragranceFamily": "Leather",
+  "mainAccords": [
+    "iris",
+    "woody",
+    "powdery",
+    "leather",
+    "violet",
+    "floral",
+    "animalic",
+    "earthy",
+    "rose",
+    "oud"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Dior/Dior-Homme-Parfum-27417.html",
+  "images": [
+    "/products/dior-dior-homme-parfum/1.avif"
+  ]
+}

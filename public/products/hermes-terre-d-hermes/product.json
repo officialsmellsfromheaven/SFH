@@ -1,0 +1,20 @@
+{
+  "id": "hermes-terre-d-hermes",
+  "slug": "hermes-terre-d-hermes",
+  "name": "Terre d Hermes",
+  "brand": "Hermes",
+  "gender": "men",
+  "fragranceFamily": "Woody Spicy",
+  "mainAccords": [
+    "citrus",
+    "woody",
+    "fresh spicy",
+    "aromatic",
+    "earthy",
+    "warm spicy"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Hermes/Terre-d-Hermes-17.html",
+  "images": [
+    "/products/hermes-terre-d-hermes/1.avif"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "mitti-parfum-ruh",
+  "slug": "mitti-parfum-ruh",
+  "name": "Ruh",
+  "brand": "Mitti Parfum",
+  "gender": "women and men",
+  "fragranceFamily": "warm, intimate",
+  "mainAccords": [
+    "warm spicy",
+    "woody",
+    "rose",
+    "powdery",
+    "vanilla",
+    "musky",
+    "sweet",
+    "balsamic",
+    "floral"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Mitti-Parfum/Ruh-127447.html",
+  "images": [
+    "/products/mitti-parfum-ruh/1.avif"
+  ]
+}

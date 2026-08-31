@@ -1,0 +1,21 @@
+{
+  "id": "nautica-nautica-voyage",
+  "slug": "nautica-nautica-voyage",
+  "name": "Nautica Voyage",
+  "brand": "Nautica",
+  "gender": "men",
+  "fragranceFamily": "Woody Aquatic",
+  "mainAccords": [
+    "green",
+    "fruity",
+    "floral",
+    "powdery",
+    "musky",
+    "aquatic",
+    "woody"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Nautica/Nautica-Voyage-913.html",
+  "images": [
+    "/products/nautica-nautica-voyage/1.avif"
+  ]
+}

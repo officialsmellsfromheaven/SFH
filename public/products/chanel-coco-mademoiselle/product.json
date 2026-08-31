@@ -1,0 +1,23 @@
+{
+  "id": "chanel-coco-mademoiselle",
+  "slug": "chanel-coco-mademoiselle",
+  "name": "Coco Mademoiselle",
+  "brand": "Chanel",
+  "gender": "women",
+  "fragranceFamily": "Oriental Floral",
+  "mainAccords": [
+    "citrus",
+    "woody",
+    "sweet",
+    "white floral",
+    "rose",
+    "earthy",
+    "vanilla",
+    "warm spicy",
+    "yellow floral"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Chanel/Coco-Mademoiselle-611.html",
+  "images": [
+    "/products/chanel-coco-mademoiselle/1.avif"
+  ]
+}

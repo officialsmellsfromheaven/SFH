@@ -1,0 +1,24 @@
+{
+  "id": "tom-ford-oud-wood",
+  "slug": "tom-ford-oud-wood",
+  "name": "Oud Wood",
+  "brand": "Tom Ford",
+  "gender": "women and men",
+  "fragranceFamily": "Oriental Woody",
+  "mainAccords": [
+    "woody",
+    "oud",
+    "warm spicy",
+    "aromatic",
+    "vanilla",
+    "balsamic",
+    "fresh spicy",
+    "amber",
+    "powdery",
+    "sweet"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Tom-Ford/Oud-Wood-1826.html",
+  "images": [
+    "/products/tom-ford-oud-wood/1.avif"
+  ]
+}

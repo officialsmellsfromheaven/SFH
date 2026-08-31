@@ -1,0 +1,21 @@
+{
+  "id": "davidoff-cool-water",
+  "slug": "davidoff-cool-water",
+  "name": "Cool Water",
+  "brand": "Davidoff",
+  "gender": "men",
+  "fragranceFamily": "Aromatic Aquatic",
+  "mainAccords": [
+    "aromatic",
+    "green",
+    "marine",
+    "fresh spicy",
+    "lavender",
+    "woody",
+    "salty"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Davidoff/Cool-Water-507.html",
+  "images": [
+    "/products/davidoff-cool-water/1.avif"
+  ]
+}

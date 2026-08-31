@@ -1,0 +1,18 @@
+{
+  "id": "louis-vuitton-imagination",
+  "slug": "louis-vuitton-imagination",
+  "name": "Imagination",
+  "brand": "Louis Vuitton",
+  "gender": "men",
+  "fragranceFamily": "Citrus Aromatic",
+  "mainAccords": [
+    "citrus",
+    "fresh spicy",
+    "green",
+    "amber"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Louis-Vuitton/Imagination-67370.html",
+  "images": [
+    "/products/louis-vuitton-imagination/1.avif"
+  ]
+}

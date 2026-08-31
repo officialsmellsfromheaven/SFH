@@ -1,0 +1,22 @@
+{
+  "id": "hugo-boss-boss-bottled",
+  "slug": "hugo-boss-boss-bottled",
+  "name": "Boss Bottled",
+  "brand": "Hugo Boss",
+  "gender": "men",
+  "fragranceFamily": "Woody Spicy",
+  "mainAccords": [
+    "woody",
+    "fruity",
+    "vanilla",
+    "warm spicy",
+    "aromatic",
+    "citrus",
+    "powdery",
+    "green"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Hugo-Boss/Boss-Bottled-383.html",
+  "images": [
+    "/products/hugo-boss-boss-bottled/1.avif"
+  ]
+}

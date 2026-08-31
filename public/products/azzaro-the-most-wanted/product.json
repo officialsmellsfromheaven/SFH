@@ -1,0 +1,20 @@
+{
+  "id": "azzaro-the-most-wanted",
+  "slug": "azzaro-the-most-wanted",
+  "name": "The Most Wanted",
+  "brand": "Azzaro",
+  "gender": "men",
+  "fragranceFamily": "Oriental Spicy",
+  "mainAccords": [
+    "warm spicy",
+    "sweet",
+    "amber",
+    "woody",
+    "caramel",
+    "aromatic"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Azzaro/The-Most-Wanted-66826.html",
+  "images": [
+    "/products/azzaro-the-most-wanted/1.avif"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "montblanc-explorer",
+  "slug": "montblanc-explorer",
+  "name": "Explorer",
+  "brand": "Montblanc",
+  "gender": "men",
+  "fragranceFamily": "Woody Aromatic",
+  "mainAccords": [
+    "woody",
+    "citrus",
+    "aromatic",
+    "amber",
+    "musky",
+    "fresh spicy",
+    "oud",
+    "warm spicy",
+    "earthy"
+  ],
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Montblanc/Explorer-52002.html",
+  "images": [
+    "/products/montblanc-explorer/1.avif"
+  ]
+}
