@@ -16,9 +16,6 @@ import {
 } from "@/lib/data";
 
 const categories = [
-  { id: "men", label: "Men" },
-  { id: "women", label: "Women" },
-  { id: "unisex", label: "Unisex" },
   { id: "attar", label: "Attars" },
   { id: "luxury", label: "Luxury Collection" },
   { id: "inspired", label: "Inspired by Designer" },
@@ -335,7 +332,7 @@ function ShopContent() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="border border-stone-200 rounded-full px-4 py-2 text-sm text-stone-700 focus:outline-none focus:border-amber-400 bg-white"
+                className="border border-stone-200 rounded-full px-4 py-2 text-sm text-stone-700 focus:outline-none focus:border-amber-400 bg-white max-[639px]:min-w-0 max-[639px]:max-w-[45vw] max-[639px]:px-3 max-[639px]:text-xs"
                 aria-label="Sort products"
               >
                 {sortOptions.map((o) => (

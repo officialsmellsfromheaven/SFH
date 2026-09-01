@@ -17,7 +17,7 @@ const footerLinks = {
     { label: "Fragrance Finder", href: "/fragrance-finder" },
     { label: "Blog", href: "/blog" },
     { label: "About Us", href: "/about" },
-    { label: "Offers & Rewards", href: "/offers" },
+    { label: "The Experience", href: "/offers" },
     { label: "Subscription Box", href: "/subscription" },
   ],
   Support: [

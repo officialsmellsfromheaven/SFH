@@ -5,10 +5,7 @@ import Link from "next/link";
 import {
   Heart,
   Share2,
-  Download,
-  FileText,
   MessageCircle,
-  Printer,
   ChevronDown,
   ChevronUp,
   Check,
@@ -23,7 +20,6 @@ import {
   getProductFragranceFamilies,
   getProductGalleryImages,
   getProductMainAccords,
-  getProductPrimaryImage,
   getProductSlug,
   getProductSubCategories,
   normalizeProductRouteValue,
@@ -37,16 +33,12 @@ import Button from "@/components/ui/Button";
 import ProductCard from "@/components/ProductCard";
 import SafeImage from "@/components/ui/SafeImage";
 import toast from "react-hot-toast";
-import { BottleSize, bottleSizes, orderConfig } from "@/lib/orderConfig";
-import {
-  buildWhatsAppUrl,
-  calculateOrderTotals,
-  createInvoiceNumber,
-  downloadInvoicePdf,
-  InvoiceDetails,
-  PersonalizationType,
-  printInvoice,
-} from "@/lib/orderUtils";
+import { BottleSize, bottleSizes } from "@/lib/orderConfig";
+import { calculateOrderTotals } from "@/lib/orderTotals";
+import { buildWhatsAppOrderUrl, type WhatsAppCustomer } from "@/lib/orderMessaging";
+import CustomerDetailsForm, { validateCustomerDetails } from "@/components/CustomerDetailsForm";
+
+type PersonalizationType = "Name" | "Initials" | "Short Message";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -68,10 +60,15 @@ export default function ProductPage() {
   const [personalizationType, setPersonalizationType] =
     useState<PersonalizationType>("Name");
   const [personalizationText, setPersonalizationText] = useState("");
-  const [customerName, setCustomerName] = useState("");
-  const [customerPhone, setCustomerPhone] = useState("");
-  const [deliveryAddress, setDeliveryAddress] = useState("");
-  const [invoice, setInvoice] = useState<InvoiceDetails | null>(null);
+  const [customer, setCustomer] = useState<WhatsAppCustomer>({
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
+  });
   const [activeTab, setActiveTab] = useState<"notes" | "details" | "reviews">("notes");
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
@@ -115,41 +112,34 @@ export default function ProductPage() {
 
   const handlePersonalizationChange = (value: string) => {
     setPersonalizationText(value.slice(0, 20));
-    setInvoice(null);
-  };
-
-  const handleGenerateInvoice = () => {
-    if (!customerName.trim() || !customerPhone.trim()) {
-      toast.error("Customer name and phone number are required for invoice.");
-      return;
-    }
-
-    setInvoice({
-      invoiceNumber: createInvoiceNumber(),
-      invoiceDate: new Date().toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      }),
-      customerName: customerName.trim(),
-      customerPhone: customerPhone.trim(),
-      deliveryAddress: deliveryAddress.trim(),
-      productName: product.name,
-      bottleSize: selectedSize,
-      quantity,
-      personalizationType,
-      personalizationText: personalizationText.trim(),
-      totals,
-    });
-    toast.success("Invoice generated. Preview is ready.");
   };
 
   const handleWhatsAppOrder = () => {
-    if (!invoice) {
-      toast.error("Please generate invoice before ordering on WhatsApp.");
+    const validationError = validateCustomerDetails(customer);
+    if (validationError) {
+      toast.error(validationError);
       return;
     }
-    window.open(buildWhatsAppUrl(invoice), "_blank", "noopener,noreferrer");
+    const item = {
+      id: `${product.id}-${selectedSize}`,
+      type: "product" as const,
+      productId: product.id,
+      productName: `${product.name} (${selectedSize})`,
+      quantity,
+      referencePrice: totals.subtotal,
+    };
+    window.open(
+      buildWhatsAppOrderUrl(customer, [item], {
+        subtotal: totals.subtotal,
+        discount: totals.discount,
+        shipping: totals.shipping,
+        personalizationCharge: totals.personalizationCharge,
+        tax: totals.gst,
+        finalTotal: totals.grandTotal,
+      }),
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   const faqItems = [
@@ -300,7 +290,6 @@ export default function ProductPage() {
                     key={size}
                     onClick={() => {
                       setSelectedSize(size);
-                      setInvoice(null);
                     }}
                     aria-label={`Select size ${size} - ${formatPrice(getProductSizePrice(product, size))}`}
                     aria-pressed={selectedSize === size}
@@ -326,7 +315,6 @@ export default function ProductPage() {
                 <button
                   onClick={() => {
                     setQuantity(Math.max(1, quantity - 1));
-                    setInvoice(null);
                   }}
                   aria-label="Decrease quantity"
                   className="px-4 py-2 text-stone-500 hover:bg-stone-100 font-bold"
@@ -339,7 +327,6 @@ export default function ProductPage() {
                 <button
                   onClick={() => {
                     setQuantity(quantity + 1);
-                    setInvoice(null);
                   }}
                   aria-label="Increase quantity"
                   className="px-4 py-2 text-stone-500 hover:bg-stone-100 font-bold"
@@ -360,7 +347,6 @@ export default function ProductPage() {
                     key={type}
                     onClick={() => {
                       setPersonalizationType(type);
-                      setInvoice(null);
                     }}
                     aria-pressed={personalizationType === type}
                     className={`px-3 py-2 rounded-full border text-xs font-semibold transition-all ${
@@ -388,46 +374,14 @@ export default function ProductPage() {
 
             {/* Customer details */}
             <div className="mb-6 rounded-2xl border border-stone-100 bg-white p-4">
-              <p className="font-semibold text-stone-800 mb-3 text-sm">Customer Details for Invoice</p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                <input
-                  value={customerName}
-                  onChange={(event) => {
-                    setCustomerName(event.target.value);
-                    setInvoice(null);
-                  }}
-                  placeholder="Customer name"
-                  className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400"
-                  aria-label="Customer name"
-                />
-                <input
-                  value={customerPhone}
-                  onChange={(event) => {
-                    setCustomerPhone(event.target.value);
-                    setInvoice(null);
-                  }}
-                  placeholder="+91 8087568338"
-                  className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400"
-                  aria-label="Customer phone number"
-                />
-              </div>
-              <textarea
-                value={deliveryAddress}
-                onChange={(event) => {
-                  setDeliveryAddress(event.target.value);
-                  setInvoice(null);
-                }}
-                rows={2}
-                placeholder="Delivery address (optional)"
-                className="mt-3 w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400 resize-none"
-                aria-label="Delivery address"
-              />
+              <p className="font-semibold text-stone-800 mb-3 text-sm">Customer Details for WhatsApp</p>
+              <CustomerDetailsForm customer={customer} onChange={setCustomer} />
             </div>
 
             {/* Order Summary */}
             <div className="mb-6 rounded-2xl border border-stone-100 bg-stone-50 p-4">
               <div className="flex items-center gap-2 mb-3">
-                <FileText size={16} className="text-amber-600" />
+                <MessageCircle size={16} className="text-amber-600" />
                 <p className="font-semibold text-stone-800 text-sm">Order Summary</p>
               </div>
               {[
@@ -452,51 +406,8 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {invoice && (
-              <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-4">
-                <div className="flex items-center justify-between gap-4 mb-3">
-                  <div>
-                    <p className="font-bold text-stone-900">Invoice Preview</p>
-                    <p className="text-xs text-stone-500">
-                      {invoice.invoiceNumber} · {invoice.invoiceDate}
-                    </p>
-                  </div>
-                  <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-amber-700">
-                    Awaiting Confirmation
-                  </span>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-2 text-sm text-stone-700">
-                  <p><span className="font-semibold">Customer:</span> {invoice.customerName}</p>
-                  <p><span className="font-semibold">Phone:</span> {invoice.customerPhone}</p>
-                  <p><span className="font-semibold">Payment:</span> Pending</p>
-                  <p><span className="font-semibold">Total:</span> {formatPrice(invoice.totals.grandTotal)}</p>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => downloadInvoicePdf(invoice)}
-                  >
-                    <Download size={14} /> Download PDF
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => printInvoice(invoice)}
-                  >
-                    <Printer size={14} /> Print Invoice
-                  </Button>
-                </div>
-              </div>
-            )}
-
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 mb-5">
-              <Button onClick={handleGenerateInvoice} size="lg" className="flex-1">
-                <FileText size={18} /> Generate Invoice
-              </Button>
               <Button onClick={handleWhatsAppOrder} variant="secondary" size="lg" className="flex-1">
                 <MessageCircle size={18} /> Order on WhatsApp
               </Button>
