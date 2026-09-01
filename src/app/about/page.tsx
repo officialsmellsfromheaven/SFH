@@ -130,15 +130,18 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-[#e8dcc2] bg-[#f6f0e4] p-3 shadow-[0_18px_40px_rgba(17,17,17,0.04)]">
-            <div className="relative aspect-[5/4] overflow-hidden rounded-[1.35rem] bg-[#f2e8d8]">
-              <Image
-                src={aboutStoryVisual?.src ?? "/logo.png"}
-                alt={aboutStoryVisual?.alt ?? "Smells From Heaven brand story collage"}
-                fill
-                sizes="(max-width: 1024px) 100vw, 620px"
-                className="object-cover"
-              />
+          <div className="relative">
+            <div className="absolute inset-6 rounded-full bg-[#e8d5a8]/30 blur-3xl" aria-hidden="true" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-[#eadfc7] bg-[#f5efe4] p-3 shadow-[0_24px_70px_rgba(17,17,17,0.08)]">
+              <div className="story-visual-frame relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#f5efe4]">
+                <Image
+                  src="/images/artsfh2.png"
+                  alt="Smells From Heaven brand story collage"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 620px"
+                  className="story-visual-image object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>

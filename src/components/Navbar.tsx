@@ -196,11 +196,22 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#e9dfcf] bg-[#faf8f3]/80 text-[#1d1d1f] backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" onClick={() => setSearchOpen(false)} className="flex items-center gap-2" aria-label="Smells From Heaven home">
-          <span className="relative h-7 w-7 overflow-hidden rounded-md border border-[#eadfc5] bg-white shadow-[0_6px_16px_rgba(17,17,17,0.04)]">
-            <Image src="/logo.png" alt="" fill sizes="28px" className="object-cover" priority />
+        <Link
+          href="/"
+          onClick={() => setSearchOpen(false)}
+          className="group flex shrink-0 items-center gap-2.5 pr-4 transition-transform duration-300 hover:scale-[1.01] sm:gap-3"
+          aria-label="Smells From Heaven home"
+        >
+          <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[#d9bf7d]/80 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.95),rgba(250,248,243,0.96)_38%,rgba(232,214,180,0.9)_100%)] shadow-[0_8px_22px_rgba(17,17,17,0.06)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-[1.06] group-hover:shadow-[0_12px_28px_rgba(184,138,59,0.18)] sm:h-11 sm:w-11">
+            <span className="absolute inset-[10%] rounded-full border border-white/60" aria-hidden="true" />
+            <span className="absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.8),transparent_42%,rgba(184,138,59,0.18)_100%)]" aria-hidden="true" />
+            <Image src="/logo.png" alt="" fill sizes="44px" className="relative z-10 object-cover transition-transform duration-300 group-hover:scale-[1.04]" priority />
           </span>
-          <span className="hidden text-[11px] font-semibold uppercase tracking-[0.14em] text-[#111111] sm:inline">Smells From Heaven</span>
+          <span className="brand-wordmark-shell">
+            <span className="navbar-brand-wordmark whitespace-nowrap sm:text-[0.72rem] lg:text-[0.82rem]">
+              SMELLS FROM HEAVEN
+            </span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">

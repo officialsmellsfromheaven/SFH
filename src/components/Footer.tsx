@@ -8,7 +8,6 @@ const footerLinks = {
     { label: "Women's Collection", href: "/shop?gender=women" },
     { label: "Unisex", href: "/shop?gender=unisex" },
     { label: "Attars", href: "/shop?category=attar" },
-    { label: "Gift Sets", href: "/shop?category=gift" },
     { label: "New Arrivals", href: "/shop?filter=new" },
     { label: "Best Sellers", href: "/shop?filter=bestseller" },
   ],
@@ -18,16 +17,15 @@ const footerLinks = {
     { label: "Blog", href: "/blog" },
     { label: "About Us", href: "/about" },
     { label: "The Experience", href: "/offers" },
-    { label: "Subscription Box", href: "/subscription" },
   ],
   Support: [
     { label: "Contact Us", href: "/contact" },
     { label: "FAQs", href: "/faq" },
-    { label: "Track Order", href: "/track-order" },
-    { label: "Return Policy", href: "/return-policy" },
-    { label: "Shipping Policy", href: "/shipping-policy" },
-    { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Track Order", href: "/account" },
+    { label: "Return Policy", href: "/faq" },
+    { label: "Shipping Policy", href: "/faq" },
+    { label: "Privacy Policy", href: "/faq" },
+    { label: "Terms & Conditions", href: "/faq" },
   ],
 };
 
@@ -85,24 +83,32 @@ export default function Footer() {
             </Link>
 
             <p className="mb-6 max-w-xs text-sm leading-6 text-[#6e6e73]">
-              Where Every Smell Is A Heavenly Delight. Crafted Heaven Worn By Legends.
+              Where Every Scent Feels Like Heaven.<br />
+              Crafted to Be Remembered.
             </p>
 
             <div className="space-y-3">
               {[
                 { icon: Mail, value: "official.smellsfromheaven@gmail.com", href: "mailto:official.smellsfromheaven@gmail.com" },
                 { icon: Phone, value: "+91 8087568338", href: "tel:+918087568338" },
-                { icon: MapPin, value: "Mumbai, Maharashtra, India", href: "#" },
+               { icon: MapPin, value: "Mumbai, Maharashtra, India", href: null },
               ].map(({ icon: Icon, value, href }) => (
-                <a
-                  key={value}
-                  href={href}
-                  className="luxury-link flex items-center gap-2 text-sm text-[#4b4b4f] transition-colors hover:text-[#b88932]"
-                >
-                  <Icon size={14} className="text-[#b88932]" />
-                  {value}
-                </a>
-              ))}
+               href ? (
+                 <a
+                   key={value}
+                   href={href}
+                   className="luxury-link flex items-center gap-2 text-sm text-[#4b4b4f] transition-colors hover:text-[#b88932]"
+                 >
+                   <Icon size={14} className="text-[#b88932]" />
+                   {value}
+                 </a>
+               ) : (
+                 <p key={value} className="flex items-center gap-2 text-sm text-[#4b4b4f]">
+                   <Icon size={14} className="text-[#b88932]" />
+                   {value}
+                 </p>
+               )
+             ))}
             </div>
 
             <div className="mt-6 flex gap-3">
@@ -144,13 +150,9 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-[#e5e1d8] bg-transparent">
-        <div className="mx-auto flex max-w-7xl flex-row flex-wrap items-center justify-center gap-3 px-4 py-5 text-center sm:px-6">
-          <p className="text-[11px] tracking-[0.08em] text-[#6e6e73]">© 2026 Smells From Heaven. All rights reserved. Made with ❤️ in India.</p>
-          <div className="flex flex-wrap items-center justify-center gap-1 text-[11px] tracking-[0.08em] text-[#6e6e73]">
-            <span className="font-medium text-[#1d1d1f]">WhatsApp Confirmation</span>
-            <span className="text-[#b88932]">|</span>
-            <span>Payment details shared after confirmation</span>
-          </div>
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center sm:px-6 md:flex-row md:text-left">
+          <p className="text-[11px] tracking-[0.08em] text-[#6e6e73]">© 2026 Smells From Heaven. All Rights Reserved.</p>
+          <p className="text-[11px] tracking-[0.08em] text-[#6e6e73]">Crafted with ✦ for fragrance lovers</p>
         </div>
       </div>
     </footer>

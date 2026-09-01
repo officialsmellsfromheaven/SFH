@@ -12,10 +12,10 @@ export default function HeroBanner() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(184,137,50,0.18),_transparent_36%)]" />
       <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-14 max-[639px]:gap-3 max-[639px]:py-8 sm:px-6 lg:grid-cols-[0.96fr_1.04fr] lg:gap-10 lg:py-20">
         <div className="max-w-xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#b88932]">SMELLS FROM HEAVEN</p>
-          <h1 className="mt-5 max-[639px]:mt-4 font-[var(--font-playfair)] text-5xl font-semibold leading-[0.9] tracking-[-0.07em] text-[#111111] sm:text-6xl lg:text-[5.3rem]">
-            <span className="block">FIND YOUR</span>
-            <span className="block">SIGNATURE.</span>
+          <h1 className="font-[var(--font-playfair)] text-5xl font-semibold leading-[0.9] tracking-[-0.07em] text-[#111111] sm:text-6xl lg:text-[5.3rem]">
+            <span className="block">BORN FROM A</span>
+            <span className="block">PASSION FOR</span>
+            <span className="block">SCENT.</span>
           </h1>
           <p className="mt-5 max-[639px]:mt-4 max-w-lg text-lg leading-7 text-[#4d4d4d] sm:text-xl">Fragrance that feels uniquely you.</p>
           <div className="mt-8 max-[639px]:mt-6 flex flex-wrap items-center gap-3.5">
