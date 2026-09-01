@@ -103,22 +103,10 @@ export default function ContactPage() {
                   href: "mailto:official.smellsfromheaven@gmail.com",
                 },
                 {
-                  icon: Phone,
-                  title: "Call Us",
-                  value: "+91 8087568338",
-                  href: "tel:+918087568338",
-                },
-                {
                   icon: MessageCircle,
                   title: "WhatsApp",
                   value: "+91 8087568338",
                   href: "https://wa.me/918087568338",
-                },
-                {
-                  icon: MapPin,
-                  title: "Office",
-                  value: "123 Fragrance Lane, Bandra West, Mumbai 400050",
-                  href: "#",
                 },
                 {
                   icon: Clock,
