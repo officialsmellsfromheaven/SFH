@@ -55,3 +55,5 @@ next-env.d.ts
 *.cart-backup-*
 *.css.combo-*
 *.css.right-scroll-*
+.env.local
+.env*.local
