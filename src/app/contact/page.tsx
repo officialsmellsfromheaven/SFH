@@ -146,11 +146,11 @@ export default function ContactPage() {
                 />
 
                 <p className="font-medium text-[#1d1d1f]">
-                  123 Fragrance Lane
+                  
                 </p>
 
                 <p className="text-sm">
-                  Bandra West, Mumbai
+                  Badlapur West, Mumbai
                 </p>
               </div>
             </div>
