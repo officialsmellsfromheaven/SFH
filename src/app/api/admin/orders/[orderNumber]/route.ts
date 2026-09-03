@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/admin-auth";
 import { ADMIN_UPDATE_STATUSES, canTransitionOrderStatus, fetchAdminOrder, getAdminSupabase } from "@/lib/admin-orders";
+import { notifyOrder, type OrderNotificationType } from "@/lib/email/resend";
 
 export async function GET(
   request: Request,
@@ -40,9 +41,24 @@ export async function PATCH(
       .from("orders")
       .update({ order_status: nextStatus })
       .eq("id", current.order.id)
+      .eq("order_status", current.order.order_status)
       .select("order_number, order_status, payment_status")
       .single();
     if (error) throw error;
+    const notificationType: Partial<Record<string, OrderNotificationType>> = {
+      PROCESSING: "ORDER_PROCESSING_CUSTOMER",
+      SHIPPED: "ORDER_SHIPPED_CUSTOMER",
+      DELIVERED: "ORDER_DELIVERED_CUSTOMER",
+      CANCELLED: "ORDER_CANCELLED_CUSTOMER",
+    };
+    const type = notificationType[nextStatus];
+    if (type) {
+      try {
+        await notifyOrder(current.order.id, [type]);
+      } catch (notificationError) {
+        console.error("[Email] status notification processing failed:", notificationError instanceof Error ? notificationError.message : "unknown error");
+      }
+    }
     return NextResponse.json({ order: data });
   } catch (error) {
     console.error("Admin order status update failed:", error);

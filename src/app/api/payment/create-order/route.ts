@@ -4,10 +4,10 @@ import Razorpay from "razorpay";
 
 import {
   calculateServerOrderSummary,
-  normalizeOrderNumber,
   sanitizeCustomer,
   validateServerCustomer,
 } from "@/lib/order-server";
+import { allocateSFHOrderNumber } from "@/lib/order-number";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -79,7 +79,10 @@ export async function POST(request: Request) {
 
     const customer = sanitizeCustomer(body.customer);
     const items = Array.isArray(body.items) ? body.items : [];
-    const requestedOrderNumber = normalizeOrderNumber(body.orderNumber);
+    const checkoutId = typeof body.checkoutId === "string" ? body.checkoutId.trim() : "";
+    if (!checkoutId || checkoutId.length > 100) {
+      return NextResponse.json({ success: false, error: "Invalid checkout session." }, { status: 400 });
+    }
 
     // ---------------------------------------------------------
     // 3. Validate cart
@@ -150,7 +153,7 @@ export async function POST(request: Request) {
         .select(
           "id, order_number, total_amount, payment_status, order_status, razorpay_order_id"
         )
-        .eq("order_number", requestedOrderNumber)
+        .eq("checkout_id", checkoutId)
         .maybeSingle();
 
     if (existingOrderError) {
@@ -168,6 +171,7 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+    let orderNumber = existingOrder?.order_number ?? await allocateSFHOrderNumber(supabase);
 
     // ---------------------------------------------------------
     // 7. Reuse existing Razorpay order
@@ -201,9 +205,10 @@ export async function POST(request: Request) {
       razorpayOrder = await razorpay.orders.create({
         amount: Math.round(finalAmount * 100),
         currency: "INR",
-        receipt: requestedOrderNumber,
+        receipt: existingOrder?.order_number ?? "SFH-PENDING",
         notes: {
-          order_number: requestedOrderNumber,
+          checkout_id: checkoutId,
+          ...(existingOrder?.order_number ? { order_number: existingOrder.order_number } : {}),
         },
       });
     } catch (error) {
@@ -223,7 +228,6 @@ export async function POST(request: Request) {
     // 9. Create or update Supabase order
     // ---------------------------------------------------------
     let orderId: string;
-    let orderNumber: string;
     let totalAmount: number;
 
     if (existingOrder) {
@@ -268,7 +272,8 @@ export async function POST(request: Request) {
         await supabase
           .from("orders")
           .insert({
-            order_number: requestedOrderNumber,
+            order_number: orderNumber,
+            checkout_id: checkoutId,
             customer_name: verifiedCustomer.name,
             customer_phone: verifiedCustomer.phone,
             customer_email: verifiedCustomer.email,
@@ -284,7 +289,7 @@ export async function POST(request: Request) {
             gst_amount: orderSummary.gstAmount,
             total_amount: finalAmount,
             payment_status: "PENDING",
-            order_status: "PENDING_CONFIRMATION",
+            order_status: "PAYMENT_PENDING",
             razorpay_order_id: razorpayOrder.id,
           })
           .select("id, order_number, total_amount")

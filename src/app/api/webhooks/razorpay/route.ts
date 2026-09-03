@@ -1,6 +1,8 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { notifyOrder } from "@/lib/email/resend";
+import { createOrderAccessToken } from "@/lib/order-access";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -73,6 +75,11 @@ export async function POST(request: Request) {
     }
 
     if (order.payment_status === "PAID" && order.razorpay_payment_id === paymentEntity.id) {
+      try {
+        await notifyOrder(order.id, ["ORDER_CONFIRMED_CUSTOMER", "ORDER_CONFIRMED_ADMIN"], `${new URL(request.url).origin}/order/${encodeURIComponent(order.order_number)}?token=${encodeURIComponent(createOrderAccessToken(order.order_number))}`);
+      } catch (notificationError) {
+        console.error("[Email] webhook notification processing failed:", notificationError instanceof Error ? notificationError.message : "unknown error");
+      }
       return NextResponse.json({ success: true, received: true, existing: true });
     }
 
@@ -97,6 +104,11 @@ export async function POST(request: Request) {
 
     if (updateError) {
       throw updateError;
+    }
+    try {
+      await notifyOrder(order.id, ["ORDER_CONFIRMED_CUSTOMER", "ORDER_CONFIRMED_ADMIN"], `${new URL(request.url).origin}/order/${encodeURIComponent(order.order_number)}?token=${encodeURIComponent(createOrderAccessToken(order.order_number))}`);
+    } catch (notificationError) {
+      console.error("[Email] webhook notification processing failed:", notificationError instanceof Error ? notificationError.message : "unknown error");
     }
 
     return NextResponse.json({ success: true, received: true, orderNumber: order.order_number });

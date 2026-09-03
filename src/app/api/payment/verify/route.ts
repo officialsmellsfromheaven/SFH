@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 import { razorpay } from "@/lib/razorpay";
 import { createOrderAccessToken } from "@/lib/order-access";
+import { notifyOrder } from "@/lib/email/resend";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -57,6 +58,11 @@ export async function POST(request: Request) {
     }
 
     if (existingOrder.payment_status === "PAID" && existingOrder.razorpay_payment_id === razorpayPaymentId) {
+      try {
+        await notifyOrder(existingOrder.id, ["ORDER_CONFIRMED_CUSTOMER", "ORDER_CONFIRMED_ADMIN"], `${new URL(request.url).origin}/order/${encodeURIComponent(existingOrder.order_number)}?token=${encodeURIComponent(createOrderAccessToken(existingOrder.order_number))}`);
+      } catch (notificationError) {
+        console.error("[Email] confirmation notification processing failed:", notificationError instanceof Error ? notificationError.message : "unknown error");
+      }
       return NextResponse.json({
         success: true,
         orderNumber: existingOrder.order_number,
@@ -123,6 +129,11 @@ export async function POST(request: Request) {
 
     if (updateError) {
       throw updateError;
+    }
+    try {
+      await notifyOrder(existingOrder.id, ["ORDER_CONFIRMED_CUSTOMER", "ORDER_CONFIRMED_ADMIN"], `${new URL(request.url).origin}/order/${encodeURIComponent(existingOrder.order_number)}?token=${encodeURIComponent(createOrderAccessToken(existingOrder.order_number))}`);
+    } catch (notificationError) {
+      console.error("[Email] confirmation notification processing failed:", notificationError instanceof Error ? notificationError.message : "unknown error");
     }
 
     return NextResponse.json({

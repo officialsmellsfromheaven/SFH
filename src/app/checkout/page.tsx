@@ -16,7 +16,6 @@ import { calculateCartPricing } from "@/lib/orderTotals";
 import CustomerDetailsForm, {
   validateCustomerDetails,
 } from "@/components/CustomerDetailsForm";
-import { generateOrderId } from "@/lib/orderMessaging";
 
 declare global {
   interface Window {
@@ -73,6 +72,7 @@ export default function CheckoutPage() {
 
   const [error, setError] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [checkoutId, setCheckoutId] = useState("");
 
   const totals = calculateCartPricing(items);
 
@@ -133,7 +133,8 @@ export default function CheckoutPage() {
         );
       }
 
-      const orderNumber = generateOrderId();
+      const requestCheckoutId = checkoutId || crypto.randomUUID();
+      if (!checkoutId) setCheckoutId(requestCheckoutId);
 
       const createOrderResponse = await fetch("/api/payment/create-order", {
         method: "POST",
@@ -143,7 +144,7 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           customer,
           items,
-          orderNumber,
+          checkoutId: requestCheckoutId,
         }),
       });
 
@@ -167,7 +168,7 @@ export default function CheckoutPage() {
         amount: createOrderResult.amount,
         currency: createOrderResult.currency,
         name: "Smells From Heaven",
-        description: `Order ${createOrderResult.orderNumber || orderNumber}`,
+        description: `Order ${createOrderResult.orderNumber}`,
         order_id: createOrderResult.razorpayOrderId,
         prefill: {
           name: customer.name,
@@ -175,7 +176,7 @@ export default function CheckoutPage() {
           contact: customer.phone,
         },
         notes: {
-          order_number: createOrderResult.orderNumber || orderNumber,
+          order_number: createOrderResult.orderNumber,
         },
         theme: {
           color: "#bf4800",
@@ -210,7 +211,7 @@ export default function CheckoutPage() {
             clearCart();
             setIsGenerating(false);
             window.location.href = `/order-success?order=${encodeURIComponent(
-              verifyResult.orderNumber || createOrderResult.orderNumber || orderNumber
+              verifyResult.orderNumber || createOrderResult.orderNumber
             )}&token=${encodeURIComponent(verifyResult.accessToken || "")}`;
           } catch (paymentError) {
             console.error("Payment verification failed:", paymentError);

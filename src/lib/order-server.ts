@@ -2,6 +2,7 @@ import type { CartItem } from "@/lib/store";
 import { products } from "@/lib/data";
 import { createClient } from "@supabase/supabase-js";
 import { verifyOrderAccessToken } from "@/lib/order-access";
+import { isValidOrderNumber } from "@/lib/order-number";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -63,7 +64,7 @@ export async function fetchSecureOrder(
   if (
     !supabaseUrl ||
     !serviceRoleKey ||
-    !/^SFH-\d{8}-[A-Za-z0-9]{4,12}$/.test(orderNumber) ||
+    !isValidOrderNumber(orderNumber) ||
     !verifyOrderAccessToken(orderNumber, token)
   ) {
     return null;
@@ -96,7 +97,6 @@ export async function fetchSecureOrder(
   };
 }
 import { calculateCartPricing } from "@/lib/orderTotals";
-import { generateOrderId } from "@/lib/orderMessaging";
 
 export type OrderCustomer = {
   name: string;
@@ -140,12 +140,6 @@ export function validateServerCustomer(
   if (!/^\d{10}$/.test(sanitized.phone.replace(/\D/g, ""))) return { valid: false, error: "Please enter a valid 10-digit mobile number." };
   if (!/^\d{6}$/.test(sanitized.pincode)) return { valid: false, error: "Please enter a valid 6-digit pincode." };
   return { valid: true, customer: sanitized };
-}
-
-export function normalizeOrderNumber(value?: string | null) {
-  return typeof value === "string" && /^SFH-\d{8}-[A-Za-z0-9]{4,12}$/.test(value.trim())
-    ? value.trim()
-    : generateOrderId();
 }
 
 export function calculateServerOrderSummary(items: CartItem[] = []): ServerOrderSummary {

@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import {
   calculateServerOrderSummary,
-  normalizeOrderNumber,
   sanitizeCustomer,
   validateServerCustomer,
 } from "@/lib/order-server";
+import { allocateSFHOrderNumber, isValidOrderNumber } from "@/lib/order-number";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -22,9 +22,9 @@ export async function GET(request: Request) {
     }
 
     const { searchParams } = new URL(request.url);
-    const orderNumber = normalizeOrderNumber(searchParams.get("order"));
+    const orderNumber = searchParams.get("order")?.trim() ?? "";
 
-    if (!orderNumber) {
+    if (!isValidOrderNumber(orderNumber)) {
       return NextResponse.json({ success: false, error: "Order number is required." }, { status: 400 });
     }
 
@@ -58,9 +58,8 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => null);
     const customer = sanitizeCustomer(body?.customer);
     const items = Array.isArray(body?.items) ? body.items : [];
-    const requestedOrderNumber = normalizeOrderNumber(body?.orderNumber);
-    const paymentStatus = body?.paymentStatus === "PAID" ? "PAID" : body?.paymentStatus === "FAILED" ? "FAILED" : "PENDING";
-    const orderStatus = body?.orderStatus === "CONFIRMED" ? "CONFIRMED" : body?.orderStatus === "PROCESSING" ? "PROCESSING" : paymentStatus === "PAID" ? "CONFIRMED" : "PAYMENT_PENDING";
+    const paymentStatus = "PENDING";
+    const orderStatus = "PAYMENT_PENDING";
 
     if (!customer || !items.length) {
       return NextResponse.json({ success: false, error: "Customer details and at least one order item are required." }, { status: 400 });
@@ -72,52 +71,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: customerValidation.error }, { status: 400 });
     }
 
-    const { data: existingOrder } = await supabase
-      .from("orders")
-      .select("id, order_number, total_amount, payment_status, order_status")
-      .eq("order_number", requestedOrderNumber)
-      .maybeSingle();
-
-    if (existingOrder) {
-      const updatePayload: Record<string, unknown> = {};
-
-      if (body?.paymentStatus) {
-        updatePayload.payment_status = paymentStatus;
-      }
-
-      if (body?.orderStatus) {
-        updatePayload.order_status = orderStatus;
-      }
-
-      if (Object.keys(updatePayload).length) {
-        const { error: updateError } = await supabase
-          .from("orders")
-          .update(updatePayload)
-          .eq("id", existingOrder.id);
-
-        if (updateError) {
-          throw updateError;
-        }
-      }
-
-      return NextResponse.json({
-        success: true,
-        order: {
-          id: existingOrder.id,
-          orderNumber: existingOrder.order_number,
-          totalAmount: existingOrder.total_amount,
-          alreadyCreated: true,
-        },
-      });
-    }
-
     const summary = calculateServerOrderSummary(items);
     const finalAmount = Number(summary.totalAmount.toFixed(2));
+    const orderNumber = await allocateSFHOrderNumber(supabase);
 
     const { data: order, error: orderInsertError } = await supabase
       .from("orders")
       .insert({
-        order_number: requestedOrderNumber,
+        order_number: orderNumber,
         customer_name: customerValidation.customer.name,
         customer_phone: customerValidation.customer.phone,
         customer_email: customerValidation.customer.email,

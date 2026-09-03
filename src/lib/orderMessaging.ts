@@ -22,12 +22,6 @@ export type CartTotals = {
   finalTotal: number;
 };
 
-export function generateOrderId() {
-  const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-  const suffix = Math.floor(1000 + Math.random() * 9000);
-  return `SFH-${stamp}-${suffix}`;
-}
-
 function itemLineTotal(item: CartItem) {
   return item.type === "combo" ? item.comboPrice ?? 0 : item.referencePrice ?? 0;
 }
@@ -49,7 +43,7 @@ export function buildWhatsAppOrderMessage(
   customer: WhatsAppCustomer,
   items: CartItem[],
   summary?: Partial<CartTotals>,
-  orderId = generateOrderId(),
+  orderId = "Pending order",
 ) {
   const totals = calculateCartTotals(items);
   const resolvedTotals = { ...totals, ...summary };
