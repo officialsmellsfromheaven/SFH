@@ -57,3 +57,6 @@ next-env.d.ts
 *.css.right-scroll-*
 .env.local
 .env*.local
+.env
+.env.local
+.env*.local

@@ -2,35 +2,13 @@
 
 import Link from "next/link";
 import { MessageCircle, Trash2 } from "lucide-react";
-import { orderConfig } from "@/lib/orderConfig";
 import { useCartStore } from "@/lib/store";
 import { formatPrice } from "@/lib/utils";
+import { calculateCartPricing } from "@/lib/orderTotals";
 
 export default function CartPage() {
   const { items, removeItem } = useCartStore();
-
-  const message = encodeURIComponent(
-    [
-      "Hello! I would like to place my order on WhatsApp.",
-      ...items.map((item) => {
-        if (item.type === "combo") {
-          return [
-            `Combo: ${item.comboName ?? "Custom Combo"}`,
-            `Bottle Size: ${item.bottleSize ?? "-"}ml`,
-            `Quantity: ${item.quantity ?? item.selectedProductIds?.length ?? 0}`,
-            `Selected Perfumes: ${(item.selectedProductNames ?? []).join(", ") || "None"}`,
-            `Combo Price: ${formatPrice(item.comboPrice ?? 0)}`,
-            `You Save: ${formatPrice(item.savings ?? 0)}`,
-          ].join("\n");
-        }
-
-        return [
-          `Product: ${item.productName ?? "Perfume"}`,
-          `Price: ${formatPrice(item.referencePrice ?? 0)}`,
-        ].join("\n");
-      }),
-    ].join("\n\n")
-  );
+  const totals = calculateCartPricing(items);
 
   return (
     <div className="min-h-screen bg-stone-50 px-4 py-12">
@@ -89,7 +67,23 @@ export default function CartPage() {
                         <span className="font-semibold text-[#0a7a40]">{formatPrice(item.savings ?? 0)}</span>
                       </div>
                     </div>
-                  ) : null}
+                  ) : (
+                    (() => {
+                      const line = totals.items.find((entry) => entry.item.id === item.id);
+                      return (
+                        <div className="mt-4 space-y-2 text-sm text-stone-600">
+                          <p>{item.bottleSize ?? "-"}ml × {line?.quantity ?? item.quantity ?? 1}</p>
+                          {line?.personalizationText ? (
+                            <p><span className="font-semibold text-stone-800">Personalization:</span> {line.personalizationType} - &quot;{line.personalizationText}&quot; ({formatPrice(line.personalizationCharge)})</p>
+                          ) : null}
+                          <div className="flex items-center justify-between border-t border-stone-100 pt-2">
+                            <span>Line total</span>
+                            <span className="font-semibold text-stone-900">{formatPrice(line?.lineTotal ?? 0)}</span>
+                          </div>
+                        </div>
+                      );
+                    })()
+                  )}
                 </div>
               ))}
             </div>
@@ -101,12 +95,11 @@ export default function CartPage() {
                   <span>Items</span>
                   <span className="font-semibold text-stone-900">{items.length}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span>Total</span>
-                  <span className="font-semibold text-stone-900">
-                    {formatPrice(items.reduce((sum, item) => sum + (item.type === "combo" ? (item.comboPrice ?? 0) : (item.referencePrice ?? 0)), 0))}
-                  </span>
-                </div>
+                <div className="flex items-center justify-between"><span>Subtotal</span><span className="font-semibold text-stone-900">{formatPrice(totals.subtotal)}</span></div>
+                {totals.discount > 0 && <div className="flex items-center justify-between"><span>Discount</span><span className="font-semibold text-green-700">-{formatPrice(totals.discount)}</span></div>}
+                <div className="flex items-center justify-between"><span>Shipping</span><span className="font-semibold text-stone-900">{totals.shipping ? formatPrice(totals.shipping) : "FREE"}</span></div>
+                <div className="flex items-center justify-between"><span>GST ({totals.gstRate}%)</span><span className="font-semibold text-stone-900">{formatPrice(totals.gst)}</span></div>
+                <div className="flex items-center justify-between border-t border-stone-200 pt-3"><span>Grand Total</span><span className="font-semibold text-stone-900">{formatPrice(totals.grandTotal)}</span></div>
               </div>
               <div className="mt-6 flex flex-col gap-3">
                 <Link

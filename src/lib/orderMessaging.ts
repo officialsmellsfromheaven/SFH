@@ -1,6 +1,7 @@
 import type { CartItem } from "./store";
 import { orderConfig } from "./orderConfig";
 import { formatPrice } from "./utils";
+import { calculateCartPricing } from "./orderTotals";
 
 export type WhatsAppCustomer = {
   name: string;
@@ -16,7 +17,7 @@ export type CartTotals = {
   subtotal: number;
   discount: number;
   shipping: number;
-  tax: number;
+  gst: number;
   personalizationCharge: number;
   finalTotal: number;
 };
@@ -31,24 +32,16 @@ function itemLineTotal(item: CartItem) {
   return item.type === "combo" ? item.comboPrice ?? 0 : item.referencePrice ?? 0;
 }
 
-function itemDiscount(item: CartItem) {
-  return item.type === "combo" ? item.discountAmount ?? item.savings ?? 0 : 0;
-}
-
 export function calculateCartTotals(items: CartItem[]): CartTotals {
-  const subtotal = items.reduce(
-    (sum, item) => sum + itemLineTotal(item) + itemDiscount(item),
-    0,
-  );
-  const discount = items.reduce((sum, item) => sum + itemDiscount(item), 0);
+  const totals = calculateCartPricing(items);
 
   return {
-    subtotal,
-    discount,
-    shipping: 0,
-    tax: 0,
-    personalizationCharge: 0,
-    finalTotal: subtotal - discount,
+    subtotal: totals.subtotal,
+    discount: totals.discount,
+    shipping: totals.shipping,
+    gst: totals.gst,
+    personalizationCharge: totals.personalizationTotal,
+    finalTotal: totals.grandTotal,
   };
 }
 
@@ -101,7 +94,7 @@ export function buildWhatsAppOrderMessage(
   if (resolvedTotals.personalizationCharge > 0) {
     lines.push(`Personalization: ${formatPrice(resolvedTotals.personalizationCharge)}`);
   }
-  if (resolvedTotals.tax > 0) lines.push(`Tax: ${formatPrice(resolvedTotals.tax)}`);
+  if (resolvedTotals.gst > 0) lines.push(`GST: ${formatPrice(resolvedTotals.gst)}`);
   lines.push(`Final Total: ${formatPrice(resolvedTotals.finalTotal)}`, "", "Please confirm my order.", "", "Thank you!", "Smells From Heaven");
   return lines.join("\n");
 }

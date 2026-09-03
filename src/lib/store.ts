@@ -18,6 +18,9 @@ export type CartItem = {
   comboPrice?: number;
   savings?: number;
   pricingRule?: Record<string, unknown>;
+  personalizationText?: string;
+  personalizationType?: "Name" | "Initials" | "Short Message";
+  personalizationCharge?: number;
   createdAt?: string;
 };
 
