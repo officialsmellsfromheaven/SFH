@@ -789,32 +789,119 @@ export default function HomePage() {
           FINAL CTA
       ====================================================== */}
 
-      <section className="bg-[#111111] py-16 text-white sm:py-20">
-        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#d9bf7f]">
-            CRAFTED IN HEAVEN. WORN BY LEGENDS.
-          </p>
+      <section className="relative overflow-hidden bg-[#111111] py-20 text-white sm:py-24">
+        {/* Soft gold atmosphere */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.55 }}
+          whileInView={{ opacity: 0.22, scale: 1 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b88932]/20 blur-3xl"
+        />
 
-          <h2 className="mt-4 font-[var(--font-playfair)] text-4xl font-semibold leading-[0.96] tracking-[-0.06em] text-white sm:text-5xl">
-            Your next signature scent is waiting.
-          </h2>
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-none absolute left-1/2 top-0 h-px w-full max-w-3xl origin-center -translate-x-1/2 bg-gradient-to-r from-transparent via-[#b88932]/70 to-transparent"
+        />
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/shop"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#faf8f3] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#111111] transition-all duration-200 hover:-translate-y-0.5"
+        <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.16 } },
+            }}
+          >
+            <motion.p
+              variants={{
+                hidden: { opacity: 0, y: 24 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+              className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#d9bf7f]"
             >
-              SHOP NOW
-              <ArrowRight size={16} />
-            </Link>
+              CRAFTED IN HEAVEN. WORN BY LEGENDS.
+            </motion.p>
 
-            <Link
-              href="/fragrance-finder"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-transparent px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-all duration-200 hover:border-[#d9bf7f] hover:text-[#d9bf7f]"
+            <motion.h2
+              variants={{
+                hidden: { opacity: 0, y: 55, scale: 0.96 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+              className="mt-5 font-[var(--font-playfair)] text-4xl font-semibold leading-[0.96] tracking-[-0.06em] text-white sm:text-5xl"
             >
-              FIND MY SCENT
-            </Link>
-          </div>
+              Your next signature scent is waiting.
+            </motion.h2>
+
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, scaleX: 0 },
+                visible: {
+                  opacity: 1,
+                  scaleX: 1,
+                  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+              className="mx-auto mt-6 h-px w-20 origin-center bg-[#b88932]"
+            />
+
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 25 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+              className="mt-9 flex flex-wrap justify-center gap-4"
+            >
+              <motion.div
+                whileHover={{ y: -5, scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Link
+                  href="/shop"
+                  className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[#faf8f3] px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#111111] shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition-shadow duration-300 hover:shadow-[0_20px_45px_rgba(184,137,50,0.18)]"
+                >
+                  <span className="relative z-10">SHOP NOW</span>
+                  <ArrowRight
+                    size={16}
+                    className="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                  <span className="absolute inset-0 -translate-x-full bg-[#ead8a8]/50 transition-transform duration-500 group-hover:translate-x-0" />
+                </Link>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ y: -5, scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Link
+                  href="/fragrance-finder"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/[0.03] px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm transition-all duration-300 hover:border-[#d9bf7f] hover:bg-white/[0.07] hover:text-[#d9bf7f]"
+                >
+                  FIND MY SCENT
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#d9bf7f] opacity-70 transition-transform duration-300 group-hover:scale-150" />
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </>
