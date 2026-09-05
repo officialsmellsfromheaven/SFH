@@ -698,7 +698,7 @@ export default function ProductPage() {
                   className="absolute -top-3 left-7 z-10 rotate-[-2deg] bg-[#fff6c9]/90 px-3 py-1 text-[16px] text-[#6f6339] shadow-[2px_3px_8px_rgba(70,50,20,0.08)]"
                   style={{ fontFamily: '"CaveatLocal", cursive' }}
                 >
-                  ready to come home? ✦
+                  ready to make it yours? ♡ ✦
                 </div>
 
                 <Button
