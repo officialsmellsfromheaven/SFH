@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, ShieldCheck, MessageCircleMore, Truck, RotateCcw, BadgeDollarSign } from "lucide-react";
@@ -46,115 +49,304 @@ const trustItems = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#e5e1d8] bg-[#faf8f3] text-[#1d1d1f] pb-20 sm:pb-10 md:pb-0">
-      <div className="border-b border-[#e5e1d8] bg-[#f7f3ee]">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:pr-[4.5rem] xl:pr-[5.5rem]">
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
-            {trustItems.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex items-center gap-3 rounded-[1rem] border border-[#e8dfcf] bg-white p-3 shadow-[0_8px_20px_rgba(0,0,0,0.02)]">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f5efe4] text-[#b88932] ring-1 ring-[#eadfc5]">
-                  <Icon size={16} strokeWidth={2.2} />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-[#1d1d1f]">{title}</p>
-                  <p className="mt-0.5 text-[11px] text-[#6e6e73]">{desc}</p>
-                </div>
-              </div>
-            ))}
+    <footer
+      className="relative overflow-hidden border-t border-[#ddd2c1] bg-[#f7f0e4] pb-20 text-[#1c2540] sm:pb-10 md:pb-0"
+      aria-label="Smells From Heaven footer"
+    >
+      {/* Soft scrapbook atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-28 top-24 h-72 w-72 rounded-full bg-[#bfe1ec]/25 blur-3xl" />
+        <div className="absolute -right-24 top-[38%] h-80 w-80 rounded-full bg-[#f3c7d3]/25 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-[#d9cdec]/20 blur-3xl" />
+      </div>
+
+      {/* Trust notes */}
+      <div className="relative border-b border-[#ddd2c1] bg-[#f2eadc]/80">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mb-5 flex items-center justify-center gap-3">
+            <span
+              className="rotate-[-2deg] text-2xl text-[#6f625b] sm:text-3xl"
+              style={{ fontFamily: "CaveatLocal, cursive" }}
+            >
+              little things we promise ✦
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {trustItems.map(({ icon: Icon, title, desc }, index) => {
+              const paperTones = [
+                "bg-[#fffdf7]",
+                "bg-[#fff6c9]",
+                "bg-[#eaf5f5]",
+                "bg-[#fbe8ee]",
+                "bg-[#eef5e9]",
+              ];
+
+              return (
+                <motion.div
+                  key={title}
+                  initial={{ opacity: 0, y: 22, rotate: 0 }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                    rotate: index % 2 === 0 ? -1 : 1,
+                  }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{
+                    duration: 0.55,
+                    delay: index * 0.07,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  whileHover={{
+                    y: -6,
+                    rotate: 0,
+                    scale: 1.025,
+                    transition: { duration: 0.25 },
+                  }}
+                  className={`group relative border border-[#ddd2c1] ${paperTones[index % paperTones.length]} p-4 shadow-[4px_6px_0_rgba(28,37,64,0.05),0_12px_25px_rgba(17,17,17,0.04)]`}
+                >
+                  <div
+                    className={`pointer-events-none absolute left-1/2 top-[-8px] h-5 w-16 -translate-x-1/2 ${
+                      index % 3 === 0
+                        ? "rotate-[-3deg] bg-[#bfe1ec]/70"
+                        : index % 3 === 1
+                          ? "rotate-[2deg] bg-[#fff6c9]/80"
+                          : "rotate-[-2deg] bg-[#f3c7d3]/70"
+                    }`}
+                  />
+
+                  <div className="flex items-start gap-3">
+                    <motion.div
+                      whileHover={{ rotate: 8, scale: 1.08 }}
+                      className="flex h-10 w-10 shrink-0 rotate-[-3deg] items-center justify-center border border-[#dcccae] bg-white/80 text-[#b88932] shadow-[2px_3px_0_rgba(28,37,64,0.05)]"
+                    >
+                      <Icon size={17} strokeWidth={2.1} />
+                    </motion.div>
+
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold leading-tight text-[#1c2540]">
+                        {title}
+                      </p>
+                      <p className="mt-1 text-[11px] leading-4 text-[#706b70]">
+                        {desc}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:pr-[4.5rem] xl:pr-[5.5rem]">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
-          <div className="lg:col-span-2">
-            <Link href="/" className="mb-4 inline-flex items-center gap-3">
-              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-[#e5e1d8] bg-white shadow-[0_8px_20px_rgba(0,0,0,0.04)]">
-                <Image src="/logo.png" alt="Smells From Heaven logo" fill className="object-cover" sizes="48px" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold leading-tight text-[#1d1d1f]">
-                  Smells From Heaven
-                </h3>
-                <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#b88932]">
-                  Premium Fragrances
-                </p>
-              </div>
-            </Link>
+      {/* Main scrapbook footer */}
+      <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.45fr_0.8fr_0.8fr_0.8fr] lg:gap-14">
+          {/* Brand note */}
+          <motion.div
+            initial={{ opacity: 0, y: 28, rotate: -2 }}
+            whileInView={{ opacity: 1, y: 0, rotate: -1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
+          >
+            <div className="relative max-w-md border border-[#dcd0bb] bg-[#fffdf7] p-6 shadow-[7px_9px_0_rgba(28,37,64,0.06),0_20px_45px_rgba(17,17,17,0.05)] sm:p-7">
+              <div className="pointer-events-none absolute left-1/2 top-[-11px] h-6 w-28 -translate-x-1/2 rotate-[-2deg] bg-[#fff6c9]/90" />
 
-            <p className="mb-6 max-w-xs text-sm leading-6 text-[#6e6e73]">
-              Where Every Scent Feels Like Heaven.<br />
-              Crafted to Be Remembered.
-            </p>
-
-            <div className="space-y-3">
-              {[
-                { icon: Mail, value: "official.smellsfromheaven@gmail.com", href: "mailto:official.smellsfromheaven@gmail.com" },
-                { icon: Phone, value: "+91 8087568338", href: "tel:+918087568338" },
-               { icon: MapPin, value: "Mumbai, Maharashtra, India", href: null },
-              ].map(({ icon: Icon, value, href }) => (
-               href ? (
-                 <a
-                   key={value}
-                   href={href}
-                   className="luxury-link flex items-center gap-2 text-sm text-[#4b4b4f] transition-colors hover:text-[#b88932]"
-                 >
-                   <Icon size={14} className="text-[#b88932]" />
-                   {value}
-                 </a>
-               ) : (
-                 <p key={value} className="flex items-center gap-2 text-sm text-[#4b4b4f]">
-                   <Icon size={14} className="text-[#b88932]" />
-                   {value}
-                 </p>
-               )
-             ))}
-            </div>
-
-            <div className="mt-6 flex gap-3">
-              {social.map(({ svg, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e5e1d8] bg-[#f5f1ea] text-[#111111] transition-all hover:border-[#b88932] hover:bg-[#f5efe4] hover:text-[#b88932]"
+              <Link href="/" className="inline-flex items-center gap-3">
+                <motion.div
+                  whileHover={{ rotate: 5, scale: 1.04 }}
+                  className="relative flex h-14 w-14 shrink-0 rotate-[-2deg] items-center justify-center overflow-hidden rounded-full border border-[#dcccae] bg-white shadow-[3px_4px_0_rgba(28,37,64,0.06)]"
                 >
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
-                    <path d={svg} />
-                  </svg>
-                </a>
-              ))}
-            </div>
-          </div>
+                  <Image
+                    src="/logo.png"
+                    alt="Smells From Heaven logo"
+                    fill
+                    className="object-cover"
+                    sizes="56px"
+                  />
+                </motion.div>
 
-          {Object.entries(footerLinks).map(([group, links]) => (
-            <div key={group}>
-              <h4 className="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-[#1d1d1f]">
-                {group}
-              </h4>
-              <ul className="space-y-2.5">
+                <div>
+                  <h3 className="font-[var(--font-playfair)] text-xl font-semibold leading-tight text-[#1c2540]">
+                    Smells From Heaven
+                  </h3>
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#b88932]">
+                    Premium Fragrances
+                  </p>
+                </div>
+              </Link>
+
+              <p
+                className="mt-6 text-3xl leading-none text-[#1c2540]"
+                style={{ fontFamily: "CaveatLocal, cursive" }}
+              >
+                Where Every Scent Feels
+                <span className="block">Like Heaven. ✦</span>
+              </p>
+
+              <p className="mt-3 max-w-sm text-sm leading-6 text-[#6e6a70]">
+                Crafted to be remembered. Made for the moments that stay with
+                you.
+              </p>
+
+              <div className="my-6 h-px w-24 bg-[#b88932]/60" />
+
+              <div className="space-y-3">
+                {[
+                  {
+                    icon: Mail,
+                    value: "official.smellsfromheaven@gmail.com",
+                    href: "mailto:official.smellsfromheaven@gmail.com",
+                  },
+                  {
+                    icon: Phone,
+                    value: "+91 8087568338",
+                    href: "tel:+918087568338",
+                  },
+                  {
+                    icon: MapPin,
+                    value: "Mumbai, Maharashtra, India",
+                    href: null,
+                  },
+                ].map(({ icon: Icon, value, href }) =>
+                  href ? (
+                    <a
+                      key={value}
+                      href={href}
+                      className="luxury-link flex items-center gap-2 text-sm text-[#4f4b53] transition-colors hover:text-[#b88932]"
+                    >
+                      <Icon size={14} className="shrink-0 text-[#b88932]" />
+                      {value}
+                    </a>
+                  ) : (
+                    <p
+                      key={value}
+                      className="flex items-center gap-2 text-sm text-[#4f4b53]"
+                    >
+                      <Icon size={14} className="shrink-0 text-[#b88932]" />
+                      {value}
+                    </p>
+                  ),
+                )}
+              </div>
+
+              <div className="mt-6 flex gap-3">
+                {social.map(({ svg, href, label }) => (
+                  <motion.a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    whileHover={{ y: -4, rotate: 5, scale: 1.08 }}
+                    whileTap={{ scale: 0.94 }}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#ddd2c1] bg-[#f5efe4] text-[#1c2540] shadow-[2px_3px_0_rgba(28,37,64,0.04)] transition-colors hover:border-[#b88932] hover:text-[#b88932]"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path d={svg} />
+                    </svg>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            <p
+              className="mt-5 ml-4 text-2xl text-[#8b827d]"
+              style={{ fontFamily: "CaveatLocal, cursive" }}
+            >
+              made with love in Mumbai ♡
+            </p>
+          </motion.div>
+
+          {/* Navigation groups */}
+          {Object.entries(footerLinks).map(([group, links], groupIndex) => (
+            <motion.div
+              key={group}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.6,
+                delay: 0.1 + groupIndex * 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="relative"
+            >
+              <div
+                className={`mb-5 inline-block rotate-[-1deg] border border-[#ddd2c1] px-3 py-2 shadow-[2px_3px_0_rgba(28,37,64,0.04)] ${
+                  groupIndex === 0
+                    ? "bg-[#fff6c9]"
+                    : groupIndex === 1
+                      ? "bg-[#bfe1ec]/45"
+                      : "bg-[#f3c7d3]/45"
+                }`}
+              >
+                <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1c2540]">
+                  {group}
+                </h4>
+              </div>
+
+              <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="luxury-link text-sm text-[#4b4b4f] transition-colors hover:text-[#b88932]">
-                      {link.label}
+                    <Link
+                      href={link.href}
+                      className="luxury-link group inline-flex items-center text-sm text-[#59555c] transition-all duration-200 hover:translate-x-1 hover:text-[#b88932]"
+                    >
+                      <span>{link.label}</span>
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
 
+        {/* Signature line */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mt-14 origin-center border-t border-dashed border-[#d8ccb8]"
+        />
+
+        <motion.div
+          initial={{ opacity: 0, y: 15, rotate: -2 }}
+          whileInView={{ opacity: 1, y: 0, rotate: -1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="mx-auto mt-7 w-fit rotate-[-1deg] border border-[#dcd0bb] bg-[#fffdf7] px-5 py-3 text-center shadow-[3px_4px_0_rgba(28,37,64,0.05)]"
+        >
+          <p
+            className="text-2xl text-[#1c2540]"
+            style={{ fontFamily: "CaveatLocal, cursive" }}
+          >
+            CRAFTED IN HEAVEN. WORN BY LEGENDS. ✦
+          </p>
+        </motion.div>
       </div>
 
-      <div className="border-t border-[#e5e1d8] bg-transparent">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center sm:px-6 md:flex-row md:text-left">
-          <p className="text-[11px] tracking-[0.08em] text-[#6e6e73]">© 2026 Smells From Heaven. All Rights Reserved.</p>
-          <p className="text-[11px] tracking-[0.08em] text-[#6e6e73]">Crafted with ✦ for fragrance lovers</p>
+      {/* Copyright */}
+      <div className="relative border-t border-[#ddd2c1] bg-[#f2eadc]/75">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center sm:px-6 md:flex-row md:text-left lg:px-8">
+          <p className="text-[11px] tracking-[0.08em] text-[#777078]">
+            © 2026 Smells From Heaven. All Rights Reserved.
+          </p>
+          <p
+            className="text-xl text-[#777078]"
+            style={{ fontFamily: "CaveatLocal, cursive" }}
+          >
+            Crafted with ✦ for fragrance lovers
+          </p>
         </div>
       </div>
     </footer>
   );
 }
+

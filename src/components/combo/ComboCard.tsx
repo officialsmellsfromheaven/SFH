@@ -15,69 +15,113 @@ type ComboCardProps = {
 export default function ComboCard({ combo }: ComboCardProps) {
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);
-  const eligibleProducts = useMemo(() => getEligibleProducts(combo, products), [combo]);
+  const eligibleProducts = useMemo(
+    () => getEligibleProducts(combo, products),
+    [combo],
+  );
   const previewProducts = useMemo(() => {
     const sorted = [...eligibleProducts].sort((a, b) => b.price - a.price);
     return sorted.slice(0, Math.max(combo.quantity, 1));
   }, [combo.quantity, eligibleProducts]);
   const metrics = useMemo(
     () => calculateComboMetrics({ combo, selectedProducts: previewProducts }),
-    [combo, previewProducts]
+    [combo, previewProducts],
   );
 
   const discountLabel = `${Number(combo.pricingRule?.targetPercentage ?? 0)}% OFF`;
 
   return (
     <>
-      <article className="luxury-card group flex h-full flex-col rounded-[1.75rem] border border-[#e9dfcf] bg-[#ffffff] p-5 shadow-[0_10px_26px_rgba(17,17,17,0.02)] hover:border-[#d8bf8b] hover:shadow-[0_18px_36px_rgba(17,17,17,0.05)]">
-        <div className="flex items-start justify-between gap-3">
+      <article className="group relative flex h-full flex-col border border-[#ddd1bf] bg-[#fffdf7] p-5 shadow-[6px_8px_0_rgba(28,37,64,0.06),0_18px_38px_rgba(17,17,17,0.05)] transition-all duration-300 hover:border-[#c9b98f] hover:shadow-[9px_12px_0_rgba(28,37,64,0.07),0_24px_45px_rgba(17,17,17,0.07)] sm:p-6">
+        <div className="pointer-events-none absolute inset-[6px] border border-dashed border-[#e8decd]" />
+
+        <div className="relative flex items-start justify-between gap-3">
           <div>
             {combo.badge ? (
-              <span className="inline-flex rounded-full border border-[#e6cd9d] bg-[#f8efe1] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8b6726]">
+              <span className="inline-flex rotate-[-2deg] border border-[#e4cf9d] bg-[#fff6c9] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8b6726] shadow-[2px_3px_0_rgba(28,37,64,0.04)]">
                 {combo.badge}
               </span>
             ) : null}
-            <h3 className="mt-3 font-[var(--font-playfair)] text-[2.1rem] font-semibold leading-none tracking-[-0.05em] text-[#111111]">{combo.name}</h3>
+
+            <h3
+              className="mt-4 text-[2.25rem] font-semibold leading-[0.9] tracking-[-0.04em] text-[#1c2540]"
+              style={{ fontFamily: "CaveatLocal, cursive" }}
+            >
+              {combo.name}
+            </h3>
           </div>
-          <div className="rounded-full border border-[#e9dfcf] bg-[#faf8f3] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#4d4d4d]">
+
+          <div className="rotate-[3deg] border border-[#dcd0bd] bg-[#f2eadc] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#4d4d4d]">
             {combo.bottleSize}ml
           </div>
         </div>
 
-        <p className="mt-3 text-sm leading-6 text-[#4d4d4d]">{combo.description || "Choose your favourite fragrances and build your own combo."}</p>
+        <p className="relative mt-4 text-sm leading-6 text-[#5c5860]">
+          {combo.description ||
+            "Choose your favourite fragrances and build your own combo."}
+        </p>
 
-        <div className="mt-5 rounded-[1.25rem] border border-[#efe6d7] bg-[#faf8f3] p-4">
-          <div className="flex items-center justify-between text-sm text-[#4d4d4d]">
-            <span>Reference price</span>
-            <span className="font-medium text-[#111111]">{formatPrice(metrics.referencePrice)}</span>
+        <div className="relative mt-5 border border-[#e5dac8] bg-[#f5efe4] p-4 shadow-[2px_3px_0_rgba(28,37,64,0.03)]">
+          <div className="mb-3 flex items-center justify-between">
+            <span
+              className="text-xl text-[#1c2540]"
+              style={{ fontFamily: "CaveatLocal, cursive" }}
+            >
+              the little math ✦
+            </span>
           </div>
-          <div className="mt-2 flex items-center justify-between text-sm text-[#4d4d4d]">
-            <span>Combo price</span>
-            <span className="font-medium text-[#111111]">{formatPrice(metrics.comboPrice)}</span>
-          </div>
-          <div className="mt-2 flex items-center justify-between text-sm text-[#4d4d4d]">
-            <span>You save</span>
-            <span className="font-medium text-[#8b6726]">{formatPrice(metrics.savings)}</span>
+
+          <div className="space-y-2 text-sm text-[#5c5860]">
+            <div className="flex items-center justify-between gap-4">
+              <span>Reference price</span>
+              <span className="font-medium text-[#1c2540]">
+                {formatPrice(metrics.referencePrice)}
+              </span>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <span>Combo price</span>
+              <span className="font-medium text-[#1c2540]">
+                {formatPrice(metrics.comboPrice)}
+              </span>
+            </div>
+            <div className="flex items-center justify-between gap-4 border-t border-dashed border-[#d9cdb9] pt-2">
+              <span className="font-medium text-[#6f5a35]">You save</span>
+              <span className="font-semibold text-[#8b6726]">
+                {formatPrice(metrics.savings)}
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="mt-5 flex items-center justify-between gap-4 rounded-[1.15rem] border border-[#efe6d7] bg-[#fffdf9] px-4 py-3">
+        <div className="relative mt-5 flex items-center justify-between gap-4 border border-[#e3d8c7] bg-[#fff6c9]/45 px-4 py-3">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#6e6e73]">Bundle</p>
-            <p className="mt-1 text-lg font-medium text-[#111111]">{combo.quantity} × {combo.bottleSize}ml</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#777078]">
+              Bundle
+            </p>
+            <p className="mt-1 text-lg font-medium text-[#1c2540]">
+              {combo.quantity} × {combo.bottleSize}ml
+            </p>
           </div>
+
           <div className="text-right">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#6e6e73]">Savings</p>
-            <p className="mt-1 text-lg font-medium text-[#8b6726]">{discountLabel}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#777078]">
+              Savings
+            </p>
+            <p
+              className="mt-1 text-2xl font-semibold text-[#8b6726]"
+              style={{ fontFamily: "CaveatLocal, cursive" }}
+            >
+              {discountLabel}
+            </p>
           </div>
         </div>
 
-        <div className="mt-auto pt-5">
+        <div className="relative mt-auto pt-6">
           <button
             ref={triggerRef}
             type="button"
             onClick={() => setOpen(true)}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#111111] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1b1b1b] hover:shadow-[0_12px_22px_rgba(17,17,17,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b88932] focus-visible:ring-offset-2"
+            className="inline-flex w-full items-center justify-center gap-2 border-2 border-[#1c2540] bg-[#1c2540] px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2b3656] hover:shadow-[4px_5px_0_rgba(28,37,64,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b88932] focus-visible:ring-offset-2"
           >
             <Sparkles size={16} />
             Build Your Combo
@@ -87,8 +131,13 @@ export default function ComboCard({ combo }: ComboCardProps) {
       </article>
 
       {open ? (
-        <ComboBuilder combo={combo} onClose={() => setOpen(false)} triggerRef={triggerRef} />
+        <ComboBuilder
+          combo={combo}
+          onClose={() => setOpen(false)}
+          triggerRef={triggerRef}
+        />
       ) : null}
     </>
   );
 }
+

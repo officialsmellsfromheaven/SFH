@@ -38,19 +38,50 @@ export default function ComboSection() {
     return null;
   }
 
+  const paperTones = [
+    "bg-[#fffdf7]",
+    "bg-[#fff6c9]",
+    "bg-[#eaf5f5]",
+    "bg-[#fbe8ee]",
+  ];
+
   return (
-    <section className="relative overflow-hidden bg-[#f7f3ee] py-20 sm:py-24 lg:py-28">
-      {/* Ambient heaven glow */}
+    <section className="relative overflow-hidden border-y border-[#ded4c4] bg-[#f7f0e4] py-20 sm:py-24 lg:py-28">
+      {/* Scrapbook heaven atmosphere */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[min(900px,100vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(184,137,50,0.09),transparent_68%)] blur-3xl"
+        className="pointer-events-none absolute -left-28 top-20 h-72 w-72 rounded-full bg-[#bfe1ec]/30 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-[#f3c7d3]/25 blur-3xl"
+      />
+
+      {/* Decorative tape + handwritten note */}
+      <motion.div
+        initial={{ opacity: 0, y: -20, rotate: -8 }}
+        whileInView={{ opacity: 1, y: 0, rotate: -5 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.7 }}
+        className="pointer-events-none absolute left-[5%] top-10 hidden w-36 rotate-[-5deg] border border-[#ddd1bf] bg-[#fffdf7] px-4 py-3 text-center shadow-[4px_6px_0_rgba(28,37,64,0.05)] lg:block"
+      >
+        <span
+          className="text-2xl leading-none text-[#1c2540]"
+          style={{ fontFamily: "CaveatLocal, cursive" }}
+        >
+          more scent = more memories ♡
+        </span>
+      </motion.div>
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[9%] top-8 hidden h-6 w-24 rotate-[5deg] bg-[#fff6c9]/80 lg:block"
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section heading */}
         <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 35, rotate: -1 }}
+          whileInView={{ opacity: 1, y: 0, rotate: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{
             duration: 0.8,
@@ -59,39 +90,21 @@ export default function ComboSection() {
           className="mx-auto mb-12 max-w-3xl text-center sm:mb-14 lg:mb-16"
         >
           <div className="mb-5 flex items-center justify-center gap-3">
-            <motion.span
-              aria-hidden="true"
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{ width: "3rem", opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.7,
-                delay: 0.15,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="h-px bg-[#b88932]/60"
-            />
+            <span className="h-px w-10 bg-[#b88932]/50 sm:w-14" />
 
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#b88932] sm:text-[11px]">
               Build your perfect bundle
             </p>
 
-            <motion.span
-              aria-hidden="true"
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{ width: "3rem", opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.7,
-                delay: 0.15,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="h-px bg-[#b88932]/60"
-            />
+            <span className="h-px w-10 bg-[#b88932]/50 sm:w-14" />
           </div>
 
-          <h2 className="font-[var(--font-playfair)] text-4xl font-semibold leading-[0.98] tracking-[-0.045em] text-[#111111] sm:text-5xl lg:text-[3.5rem]">
-            Custom fragrance combos
+          <h2
+            className="text-5xl font-semibold leading-[0.88] tracking-[-0.06em] text-[#1c2540] sm:text-6xl lg:text-[4.7rem]"
+            style={{ fontFamily: "CaveatLocal, cursive" }}
+          >
+            Custom fragrance
+            <span className="block text-[#8b6726]">combos ✦</span>
           </h2>
 
           <motion.div
@@ -101,10 +114,10 @@ export default function ComboSection() {
             viewport={{ once: true }}
             transition={{
               duration: 0.65,
-              delay: 0.3,
+              delay: 0.2,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto mt-6 h-px w-14 origin-center bg-[#b88932] sm:mt-7 sm:w-16"
+            className="mx-auto mt-5 h-px w-16 origin-center bg-[#b88932] sm:mt-6"
           />
 
           <motion.p
@@ -113,17 +126,16 @@ export default function ComboSection() {
             viewport={{ once: true }}
             transition={{
               duration: 0.6,
-              delay: 0.35,
+              delay: 0.25,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto mt-5 max-w-2xl text-[14px] leading-7 text-[#4d4d4d] sm:mt-6 sm:text-base"
+            className="mx-auto mt-5 max-w-2xl text-[14px] leading-7 text-[#5f5a61] sm:mt-6 sm:text-base"
           >
-            Mix your favourite scents, choose the right bottle size, and
-            unlock a smarter, more rewarding price per fragrance.
+            Mix your favourite scents, choose the right bottle size, and make
+            your own little heaven — with smarter savings along the way.
           </motion.p>
         </motion.div>
 
-        {/* Combo cards */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -132,22 +144,41 @@ export default function ComboSection() {
             once: true,
             amount: 0.12,
           }}
-          className="grid gap-5 lg:grid-cols-2 xl:grid-cols-4"
+          className="grid gap-6 lg:grid-cols-2 xl:grid-cols-4"
         >
-          {combos.map((combo) => (
+          {combos.map((combo, index) => (
             <motion.div
               key={combo.id}
               variants={itemVariants}
               whileHover={{
-                y: -6,
+                y: -8,
+                rotate: index % 2 === 0 ? -1 : 1,
                 transition: {
                   duration: 0.3,
                   ease: [0.22, 1, 0.36, 1],
                 },
               }}
-              className="will-change-transform"
+              className="relative will-change-transform"
             >
-              <ComboCard combo={combo} />
+              {/* Washi tape */}
+              <div
+                aria-hidden="true"
+                className={`pointer-events-none absolute left-1/2 top-[-9px] z-10 h-5 w-20 -translate-x-1/2 ${
+                  index % 3 === 0
+                    ? "rotate-[-3deg] bg-[#bfe1ec]/75"
+                    : index % 3 === 1
+                      ? "rotate-[2deg] bg-[#fff6c9]/85"
+                      : "rotate-[-2deg] bg-[#f3c7d3]/75"
+                }`}
+              />
+
+              <div className="relative">
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute -bottom-2 left-2 right-2 h-full rotate-[1deg] border border-[#ddd1bf] ${paperTones[index % paperTones.length]} opacity-60`}
+                />
+                <ComboCard combo={combo} />
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -155,3 +186,4 @@ export default function ComboSection() {
     </section>
   );
 }
+
