@@ -1,0 +1,68 @@
+{
+  "id": "tom-ford-ombre-leather-parfum",
+  "slug": "tom-ford-ombre-leather-parfum",
+  "name": "Ombre Leather Parfum",
+  "brand": "Tom Ford",
+  "category": "unisex",
+  "gender": "women and men",
+  "fragranceFamily": "Leather",
+  "description": "Ombré Leather Parfum by Tom Ford is a Leather fragrance for women and men. Ombré Leather Parfum was launched in 2021. The nose behind this fragrance is ...",
+  "launchYear": 2021,
+  "topNotes": [
+    "Violet Leaf",
+    "Cedar"
+  ],
+  "heartNotes": [
+    "Jasmine Sambac",
+    "Orris"
+  ],
+  "baseNotes": [
+    "Leather",
+    "Woody Notes",
+    "Tobacco"
+  ],
+  "mainAccordsList": [
+    "leather",
+    "woody",
+    "ozonic",
+    "animalic",
+    "aquatic",
+    "white floral",
+    "tobacco",
+    "iris",
+    "smoky",
+    "powdery"
+  ],
+  "fragranticaRating": 4.31,
+  "fragranticaRatingVotes": 4959,
+  "fragranticaReviewCount": 456,
+  "notes": {
+    "top": [
+      "Violet Leaf",
+      "Cedar"
+    ],
+    "heart": [
+      "Jasmine Sambac",
+      "Orris"
+    ],
+    "base": [
+      "Leather",
+      "Woody Notes",
+      "Tobacco"
+    ]
+  },
+  "fragrantica": {
+    "url": "https://www.fragrantica.com/perfume/Tom-Ford/Ombre-Leather-Parfum-68716.html",
+    "launchYear": 2021,
+    "rating": 4.31,
+    "ratingVotes": 4959,
+    "reviewCount": 456,
+    "performance": {},
+    "whenToWear": {}
+  },
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Tom-Ford/Ombre-Leather-Parfum-68716.html",
+  "dataSource": "Fragrantica",
+  "images": [
+    "/products/tom-ford-ombre-leather-parfum/1.avif"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "diptyque-orpheon-eau-de-parfum",
+  "slug": "diptyque-orpheon-eau-de-parfum",
+  "name": "Orpheon Eau de Parfum",
+  "brand": "Diptyque",
+  "gender": "women and men",
+  "fragranceFamily": "Woody Chypre",
+  "topNotes": [
+    "Juniper Berries"
+  ],
+  "heartNotes": [
+    "Jasmine"
+  ],
+  "baseNotes": [
+    "Powdery Notes",
+    "Cedar",
+    "Tonka Bean"
+  ],
+  "mainAccordsList": [
+    "powdery",
+    "woody",
+    "aromatic",
+    "fresh spicy",
+    "white floral"
+  ],
+  "notes": {
+    "top": [
+      "Juniper Berries"
+    ],
+    "heart": [
+      "Jasmine"
+    ],
+    "base": [
+      "Powdery Notes",
+      "Cedar",
+      "Tonka Bean"
+    ]
+  },
+  "fragrantica": {
+    "url": "https://www.fragrantica.com/perfume/Diptyque/Orpheon-Eau-de-Parfum-65738.html"
+  },
+  "fragranticaUrl": "https://www.fragrantica.com/perfume/Diptyque/Orpheon-Eau-de-Parfum-65738.html",
+  "category": "unisex",
+  "images": [
+    "/products/diptyque-orpheon-eau-de-parfum/1.avif"
+  ]
+}

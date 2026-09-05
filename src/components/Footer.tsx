@@ -24,7 +24,7 @@ const footerLinks = {
   Support: [
     { label: "Contact Us", href: "/contact" },
     { label: "FAQs", href: "/faq" },
-    { label: "Track Order", href: "/account" },
+    { label: "Track Order", href: "/track-order" },
     { label: "Return Policy", href: "/faq" },
     { label: "Shipping Policy", href: "/faq" },
     { label: "Privacy Policy", href: "/faq" },
@@ -206,7 +206,7 @@ export default function Footer() {
                   },
                   {
                     icon: MapPin,
-                    value: "Mumbai, Maharashtra, India",
+                    value: "Chhatrapati Sambhajinagar, Maharashtra, India",
                     href: null,
                   },
                 ].map(({ icon: Icon, value, href }) =>
@@ -259,7 +259,7 @@ export default function Footer() {
               className="mt-5 ml-4 text-2xl text-[#8b827d]"
               style={{ fontFamily: "CaveatLocal, cursive" }}
             >
-              made with love in Mumbai ♡
+              made with love in Chhatrapati Sambhajinagar ♡
             </p>
           </motion.div>
 

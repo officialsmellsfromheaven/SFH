@@ -1435,6 +1435,99 @@ export const generatedProducts = [
     ]
   },
   {
+    "id": "diptyque-orpheon-eau-de-parfum",
+    "slug": "diptyque-orpheon-eau-de-parfum",
+    "name": "Orpheon Eau de Parfum",
+    "brand": "Diptyque",
+    "category": "unisex",
+    "price": 299,
+    "sizes": [
+      {
+        "size": "20ml",
+        "price": 299
+      },
+      {
+        "size": "30ml",
+        "price": 399
+      },
+      {
+        "size": "50ml",
+        "price": 599
+      },
+      {
+        "size": "100ml",
+        "price": 1199
+      }
+    ],
+    "images": [
+      "/products/diptyque-orpheon-eau-de-parfum/1.avif"
+    ],
+    "thumbnail": "/products/diptyque-orpheon-eau-de-parfum/1.avif",
+    "fragranceFamily": "Woody Chypre",
+    "occasion": [
+      "Daily Wear"
+    ],
+    "longevity": "8–12 hours",
+    "projection": "Moderate",
+    "season": [
+      "All Seasons"
+    ],
+    "gender": "women and men",
+    "topNotes": [
+      "Juniper Berries"
+    ],
+    "heartNotes": [
+      "Jasmine"
+    ],
+    "baseNotes": [
+      "Powdery Notes",
+      "Cedar",
+      "Tonka Bean"
+    ],
+    "description": "Orpheon Eau de Parfum is a refined fragrance crafted for everyday elegance.",
+    "rating": 4.5,
+    "reviewCount": 0,
+    "isNew": false,
+    "isBestSeller": false,
+    "isLimited": false,
+    "featured": false,
+    "bestseller": false,
+    "newArrival": false,
+    "available": true,
+    "stock": 999,
+    "ingredients": "Alcohol Denat., Parfum (Fragrance)",
+    "collections": [
+      "Signature Collection"
+    ],
+    "collection": "Signature Collection",
+    "tags": [
+      "Orpheon Eau de Parfum"
+    ],
+    "notes": {
+      "top": [
+        "Juniper Berries"
+      ],
+      "heart": [
+        "Jasmine"
+      ],
+      "base": [
+        "Powdery Notes",
+        "Cedar",
+        "Tonka Bean"
+      ]
+    },
+    "mainAccords": [
+      {
+        "name": "Fresh",
+        "strength": 70
+      },
+      {
+        "name": "Woody",
+        "strength": 60
+      }
+    ]
+  },
+  {
     "id": "faberge-brut",
     "slug": "faberge-brut",
     "name": "Brut",
@@ -3023,6 +3116,103 @@ export const generatedProducts = [
       "powdery",
       "animalic",
       "sweet"
+    ]
+  },
+  {
+    "id": "tom-ford-ombre-leather-parfum",
+    "slug": "tom-ford-ombre-leather-parfum",
+    "name": "Ombre Leather Parfum",
+    "brand": "Tom Ford",
+    "category": "unisex",
+    "price": 299,
+    "sizes": [
+      {
+        "size": "20ml",
+        "price": 299
+      },
+      {
+        "size": "30ml",
+        "price": 399
+      },
+      {
+        "size": "50ml",
+        "price": 599
+      },
+      {
+        "size": "100ml",
+        "price": 1199
+      }
+    ],
+    "images": [
+      "/products/tom-ford-ombre-leather-parfum/1.avif"
+    ],
+    "thumbnail": "/products/tom-ford-ombre-leather-parfum/1.avif",
+    "fragranceFamily": "Leather",
+    "occasion": [
+      "Daily Wear"
+    ],
+    "longevity": "8–12 hours",
+    "projection": "Moderate",
+    "season": [
+      "All Seasons"
+    ],
+    "gender": "women and men",
+    "topNotes": [
+      "Violet Leaf",
+      "Cedar"
+    ],
+    "heartNotes": [
+      "Jasmine Sambac",
+      "Orris"
+    ],
+    "baseNotes": [
+      "Leather",
+      "Woody Notes",
+      "Tobacco"
+    ],
+    "description": "Ombré Leather Parfum by Tom Ford is a Leather fragrance for women and men. Ombré Leather Parfum was launched in 2021. The nose behind this fragrance is ...",
+    "rating": 4.5,
+    "reviewCount": 0,
+    "isNew": false,
+    "isBestSeller": false,
+    "isLimited": false,
+    "featured": false,
+    "bestseller": false,
+    "newArrival": false,
+    "available": true,
+    "stock": 999,
+    "ingredients": "Alcohol Denat., Parfum (Fragrance)",
+    "collections": [
+      "Signature Collection"
+    ],
+    "collection": "Signature Collection",
+    "tags": [
+      "Ombre Leather Parfum"
+    ],
+    "notes": {
+      "top": [
+        "Violet Leaf",
+        "Cedar"
+      ],
+      "heart": [
+        "Jasmine Sambac",
+        "Orris"
+      ],
+      "base": [
+        "Leather",
+        "Woody Notes",
+        "Tobacco"
+      ]
+    },
+    "mainAccords": [
+      {
+        "name": "Fresh",
+        "strength": 70
+      },
+      {
+        "name": "Woody",
+        "strength": 60
+      }
     ]
   },
   {

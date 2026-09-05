@@ -13,96 +13,242 @@ export default function BlogPage() {
   const [featured, ...rest] = blogPosts;
 
   return (
-    <div className="min-h-screen bg-stone-50">
-      <PageHero
-        eyebrow="Knowledge & Inspiration"
-        title="The Heaven Journal"
-        subtitle="Fragrance guides, expert tips, and everything you need to know about the world of scent."
-        showLogo
-      />
+    <main className="relative min-h-screen overflow-hidden bg-[#f7f0e4] text-[#1c2540]">
+      {/* Soft Heaven atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-28 top-28 h-80 w-80 rounded-full bg-[#f3c7d3]/35 blur-3xl" />
+        <div className="absolute -right-24 top-20 h-80 w-80 rounded-full bg-[#bfe1ec]/45 blur-3xl" />
+        <div className="absolute left-1/2 top-[52%] h-96 w-96 -translate-x-1/2 rounded-full bg-[#d9cdec]/25 blur-3xl" />
+        <div
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, #1c2540 1px, transparent 1px)",
+            backgroundSize: "26px 26px",
+          }}
+        />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
-        {/* Featured post */}
-        <div className="mb-12">
-          <Link
-            href={`/blog/${featured.id}`}
-            className="group grid lg:grid-cols-2 gap-8 bg-white rounded-3xl overflow-hidden border border-stone-100 shadow-sm hover:shadow-xl hover:shadow-amber-50 transition-all duration-300"
-          >
-            <div className="aspect-video lg:aspect-auto bg-gradient-to-br from-amber-100 to-rose-100 relative overflow-hidden lg:min-h-[320px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-700/40 to-stone-900/60 flex items-center justify-center">
-                <span className="text-6xl">🌸</span>
-              </div>
-              <div className="absolute top-4 left-4 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                Featured
-              </div>
-            </div>
-            <div className="p-8 flex flex-col justify-center">
-              <span className="text-amber-600 text-xs font-bold uppercase tracking-wider mb-3">
-                {featured.category}
+      {/* Journal header */}
+      <section className="relative px-4 pb-10 pt-8 sm:px-6 sm:pt-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[34px] border border-[#1c2540]/10 bg-[#fffdf7] px-5 py-9 shadow-[0_24px_70px_rgba(28,37,64,0.10)] sm:px-10 sm:py-12">
+            <div className="absolute left-12 top-0 h-9 w-28 -translate-y-1/2 rotate-[-3deg] bg-[#f3c7d3]/70 shadow-sm" />
+            <div className="absolute right-10 top-7 hidden rotate-[4deg] bg-[#fff6c9] px-4 py-2 shadow-sm sm:block">
+              <span className="caveat text-lg font-semibold">
+                little notes from heaven ♡
               </span>
-              <h2 className="text-2xl font-bold font-[var(--font-playfair)] text-stone-900 mb-3 group-hover:text-amber-700 transition-colors">
-                {featured.title}
-              </h2>
-              <p className="text-stone-500 leading-relaxed mb-4">{featured.excerpt}</p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4 text-sm text-stone-400">
-                  <div className="flex items-center gap-1">
-                    <Clock size={13} /> {featured.readTime}
-                  </div>
-                  <span>{new Date(featured.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</span>
-                </div>
-                <div className="flex items-center gap-1 text-amber-600 font-semibold text-sm group-hover:gap-2 transition-all">
-                  Read More <ArrowRight size={14} />
-                </div>
-              </div>
             </div>
-          </Link>
-        </div>
 
-        {/* Categories */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {["All", "Fragrance Guide", "Education", "Tips & Tricks", "Men's Fragrances", "Care Tips"].map((cat) => (
-            <button
-              key={cat}
-              className="px-4 py-1.5 rounded-full text-sm font-medium border border-stone-200 text-stone-600 hover:border-amber-400 hover:text-amber-700 transition-colors first:bg-amber-600 first:text-white first:border-amber-600"
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+            <div className="max-w-3xl">
+              <Link
+                href="/"
+                className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#1c2540]/45 transition-colors hover:text-[#b88932]"
+              >
+                Smells From Heaven
+              </Link>
 
-        {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rest.map((post) => (
+              <p className="caveat mt-7 text-2xl font-semibold text-[#b88932]">
+                stories, secrets & scent ✦
+              </p>
+
+              <h1 className="mt-2 font-serif text-4xl font-bold tracking-[-0.04em] sm:text-6xl">
+                The Heaven Journal
+              </h1>
+
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-[#1c2540]/65 sm:text-base">
+                Fragrance guides, expert tips, and little discoveries from the
+                world of scent — collected for your next olfactory adventure.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative px-4 pb-16 sm:px-6 sm:pb-20">
+        <div className="mx-auto max-w-7xl">
+          {/* Featured memory */}
+          <div className="mb-12">
             <Link
-              key={post.id}
-              href={`/blog/${post.id}`}
-              className="group bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-sm hover:shadow-xl hover:shadow-amber-50 transition-all duration-300"
+              href={`/blog/${featured.id}`}
+              className="group relative grid overflow-hidden rounded-[30px] border border-[#1c2540]/10 bg-[#fffdf7] shadow-[8px_10px_0_rgba(28,37,64,0.055)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[10px_14px_0_rgba(28,37,64,0.07)] lg:grid-cols-[1.08fr_0.92fr]"
             >
-              <div className="aspect-video bg-gradient-to-br from-stone-100 to-amber-50 relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-4xl">
-                  {["🧴", "📚", "🌿", "👔", "💡"][parseInt(post.id) % 5]}
+              <div className="absolute left-5 top-4 z-20 h-9 w-24 rotate-[-5deg] bg-[#bfe1ec]/80 shadow-sm" />
+
+              <div className="relative min-h-[280px] overflow-hidden bg-[#d9cdec]/60 sm:min-h-[380px]">
+                <div className="absolute inset-5 rotate-[-2deg] rounded-[24px] border border-[#1c2540]/10 bg-gradient-to-br from-[#bfe1ec] via-[#d9cdec] to-[#f3c7d3] shadow-[8px_10px_0_rgba(28,37,64,0.08)]" />
+                <div className="absolute inset-10 rotate-[3deg] rounded-[20px] border-2 border-white/70 bg-[#fffdf7]/30" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative flex h-32 w-32 rotate-[-6deg] items-center justify-center rounded-full border-2 border-[#1c2540]/10 bg-[#fffdf7]/85 shadow-[5px_7px_0_rgba(28,37,64,0.08)]">
+                    <span className="text-6xl">🌸</span>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-5 left-5 rounded-md bg-[#fff6c9] px-4 py-2 shadow-sm rotate-[-3deg]">
+                  <span className="caveat text-lg font-semibold">
+                    featured ✦
+                  </span>
                 </div>
               </div>
-              <div className="p-5">
-                <span className="text-amber-600 text-xs font-bold uppercase tracking-wider">
-                  {post.category}
+
+              <div className="flex flex-col justify-center p-7 sm:p-9">
+                <span className="caveat text-xl font-semibold text-[#b88932]">
+                  {featured.category}
                 </span>
-                <h3 className="font-bold text-stone-800 mt-1.5 mb-2 group-hover:text-amber-700 transition-colors leading-snug">
-                  {post.title}
-                </h3>
-                <p className="text-stone-500 text-sm line-clamp-2 mb-3">{post.excerpt}</p>
-                <div className="flex items-center justify-between text-xs text-stone-400">
-                  <div className="flex items-center gap-1">
-                    <Clock size={11} /> {post.readTime}
-                  </div>
-                  <span>{new Date(post.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}</span>
+
+                <h2 className="mt-2 font-serif text-2xl font-bold leading-tight tracking-[-0.02em] transition-colors group-hover:text-[#b88932] sm:text-3xl">
+                  {featured.title}
+                </h2>
+
+                <p className="mt-4 text-sm leading-7 text-[#1c2540]/60">
+                  {featured.excerpt}
+                </p>
+
+                <div className="mt-7 flex flex-wrap items-center gap-3 text-xs font-semibold text-[#1c2540]/45">
+                  <span className="rounded-full bg-[#f7f0e4] px-3 py-1.5">
+                    <Clock className="mr-1 inline-block" size={13} />
+                    {featured.readTime}
+                  </span>
+                  <span>
+                    {new Date(featured.date).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+
+                <div className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-[#1c2540] transition-all group-hover:gap-3 group-hover:text-[#b88932]">
+                  Read this story <ArrowRight size={16} />
                 </div>
               </div>
             </Link>
-          ))}
+          </div>
+
+          {/* Categories */}
+          <div className="mb-9">
+            <div className="mb-4 flex items-center justify-between gap-4">
+              <div>
+                <p className="caveat text-2xl font-semibold text-[#1c2540]/70">
+                  browse the shelf...
+                </p>
+                <h2 className="mt-1 font-serif text-2xl font-bold sm:text-3xl">
+                  Find your kind of story.
+                </h2>
+              </div>
+              <span className="hidden text-xs font-bold uppercase tracking-[0.16em] text-[#1c2540]/35 sm:block">
+                journal index
+              </span>
+            </div>
+
+            <div className="flex flex-wrap gap-2.5">
+              {["All", "Fragrance Guide", "Education", "Tips & Tricks", "Men's Fragrances", "Care Tips"].map(
+                (cat, index) => (
+                  <button
+                    key={cat}
+                    className={`rounded-full border px-4 py-2 text-xs font-bold transition-all duration-300 hover:-translate-y-0.5 ${
+                      index === 0
+                        ? "border-[#1c2540] bg-[#1c2540] text-white shadow-[3px_4px_0_rgba(28,37,64,0.12)]"
+                        : index % 3 === 1
+                          ? "border-[#f3c7d3]/70 bg-[#f3c7d3]/45 text-[#1c2540] hover:bg-[#f3c7d3]/65"
+                          : index % 3 === 2
+                            ? "border-[#bfe1ec]/70 bg-[#bfe1ec]/45 text-[#1c2540] hover:bg-[#bfe1ec]/65"
+                            : "border-[#cfe6cf]/70 bg-[#cfe6cf]/45 text-[#1c2540] hover:bg-[#cfe6cf]/65"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+
+          {/* Post shelf */}
+          <div className="relative rounded-[30px] border border-[#1c2540]/10 bg-[#fffdf7]/75 p-4 shadow-[8px_10px_0_rgba(28,37,64,0.045)] sm:p-6">
+            <div className="absolute -top-3 left-10 rotate-[-2deg] bg-[#fff6c9] px-4 py-2 shadow-sm">
+              <span className="caveat text-lg font-semibold">
+                pages worth opening ✦
+              </span>
+            </div>
+
+            <div className="grid gap-5 pt-4 sm:grid-cols-2 lg:grid-cols-3">
+              {rest.map((post, index) => (
+                <Link
+                  key={post.id}
+                  href={`/blog/${post.id}`}
+                  className={`group relative overflow-hidden rounded-[24px] border border-[#1c2540]/10 bg-[#fffdf7] shadow-[5px_7px_0_rgba(28,37,64,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[7px_10px_0_rgba(28,37,64,0.08)] ${
+                    index % 3 === 1
+                      ? "rotate-[0.7deg]"
+                      : index % 3 === 2
+                        ? "rotate-[-0.7deg]"
+                        : ""
+                  }`}
+                >
+                  <div
+                    className={`absolute left-1/2 top-0 z-10 h-8 w-16 -translate-x-1/2 -translate-y-1/2 rotate-[2deg] shadow-sm ${
+                      index % 3 === 0
+                        ? "bg-[#f3c7d3]/80"
+                        : index % 3 === 1
+                          ? "bg-[#bfe1ec]/80"
+                          : "bg-[#fff6c9]/85"
+                    }`}
+                  />
+
+                  <div className="relative aspect-[1.35/1] overflow-hidden bg-[#f7f0e4]">
+                    <div
+                      className={`absolute inset-5 rotate-[-2deg] rounded-[18px] border border-[#1c2540]/10 shadow-[4px_5px_0_rgba(28,37,64,0.07)] ${
+                        index % 3 === 0
+                          ? "bg-[#f3c7d3]"
+                          : index % 3 === 1
+                            ? "bg-[#bfe1ec]"
+                            : "bg-[#cfe6cf]"
+                      }`}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="relative text-5xl transition-transform duration-500 group-hover:scale-110">
+                        {["🧴", "📚", "🌿", "👔", "💡"][parseInt(post.id) % 5]}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-5">
+                    <span className="caveat text-xl font-semibold text-[#b88932]">
+                      {post.category}
+                    </span>
+
+                    <h3 className="mt-1.5 text-lg font-bold leading-snug transition-colors group-hover:text-[#b88932]">
+                      {post.title}
+                    </h3>
+
+                    <p className="mt-2 line-clamp-2 text-sm leading-6 text-[#1c2540]/55">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="mt-4 flex items-center justify-between border-t border-dashed border-[#1c2540]/10 pt-3 text-xs font-semibold text-[#1c2540]/40">
+                      <span>
+                        <Clock className="mr-1 inline-block" size={11} />
+                        {post.readTime}
+                      </span>
+                      <span>
+                        {new Date(post.date).toLocaleDateString("en-IN", {
+                          day: "numeric",
+                          month: "short",
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-9 text-center">
+            <p className="caveat text-xl font-semibold text-[#1c2540]/60">
+              take a page, make it yours, find your signature scent ♡
+            </p>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

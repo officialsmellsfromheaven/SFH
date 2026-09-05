@@ -1324,6 +1324,52 @@ const legacyProducts: Product[] = [
 
 const discoveredProducts: Product[] = generatedProducts as Product[];
 
+// The filesystem/generated catalog is the primary source for product identity,
+// pricing, images, and inventory. Some generated records can contain generic
+// fragrance-note placeholders, though. For products that also exist in the
+// curated legacy catalog, keep the generated record but restore the curated
+// fragrance metadata so every known perfume shows its own real note pyramid.
+function getLegacyFragranceData(product: Product): Product | undefined {
+  const productName = normalizeProductIdentity(product.name);
+  const productBrandName = normalizeProductIdentity(
+    product.brand && product.name ? `${product.brand} ${product.name}` : product.name
+  );
+
+  return legacyProducts.find((legacy) => {
+    const legacyName = normalizeProductIdentity(legacy.name);
+    const legacyBrandName = normalizeProductIdentity(
+      legacy.brand && legacy.name ? `${legacy.brand} ${legacy.name}` : legacy.name
+    );
+
+    return (
+      productBrandName === legacyBrandName ||
+      productName === legacyName
+    );
+  });
+}
+
+function enrichGeneratedProductFragranceData(product: Product): Product {
+  const legacy = getLegacyFragranceData(product);
+  if (!legacy) return product;
+
+  return {
+    ...product,
+    fragranceFamily: legacy.fragranceFamily,
+    occasion: legacy.occasion,
+    longevity: legacy.longevity,
+    projection: legacy.projection,
+    season: legacy.season,
+    gender: legacy.gender,
+    topNotes: legacy.topNotes,
+    heartNotes: legacy.heartNotes,
+    baseNotes: legacy.baseNotes,
+    mainAccords: legacy.mainAccords,
+    notes: legacy.notes,
+    dayNight: legacy.dayNight,
+    seasons: legacy.seasons,
+  };
+}
+
 function mergeProductsByCanonicalIdentity(legacy: Product[], filesystem: Product[]): Product[] {
   const uniqueProducts = new Map<string, Product>();
   const sourceByIdentity = new Map<string, "legacy" | "filesystem">();
@@ -1371,7 +1417,9 @@ function mergeProductsByCanonicalIdentity(legacy: Product[], filesystem: Product
   return Array.from(uniqueProducts.values());
 }
 
-export const products: Product[] = (discoveredProducts as Product[]).map((product) => normalizeProductPricing(product));
+export const products: Product[] = discoveredProducts.map((product) =>
+  normalizeProductPricing(enrichGeneratedProductFragranceData(product))
+);
 
 export const fragranceFamilies = [
   "Fresh & Clean",
