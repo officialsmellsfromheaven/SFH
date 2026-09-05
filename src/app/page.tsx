@@ -223,6 +223,53 @@ const campaignButton: Variants = {
 };
 
 /* =========================================================
+   WHY SFH ANIMATIONS
+========================================================= */
+
+const whySfhContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.18,
+    },
+  },
+};
+
+const whySfhItem: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 55,
+    scale: 0.94,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const whySfhIcon: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.5,
+    rotate: -25,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+/* =========================================================
    HOME PAGE
 ========================================================= */
 
@@ -739,43 +786,205 @@ export default function HomePage() {
 
       {/* =====================================================
           WHY SFH
+          CINEMATIC SCROLL + STAGGER ANIMATION
       ====================================================== */}
 
-      <section className="bg-white py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-8 text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b88932]">
+      <section className="relative overflow-hidden bg-white py-20 sm:py-24">
+        {/* Ambient luxury glow */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            scale: 0.65,
+          }}
+          whileInView={{
+            opacity: 0.55,
+            scale: 1,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 1.4,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="pointer-events-none absolute -left-40 top-1/2 h-[30rem] w-[30rem] -translate-y-1/2 rounded-full bg-[#d9bf7f]/15 blur-3xl"
+        />
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            scale: 0.65,
+          }}
+          whileInView={{
+            opacity: 0.45,
+            scale: 1,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 1.5,
+            delay: 0.15,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="pointer-events-none absolute -right-40 bottom-[-8rem] h-[28rem] w-[28rem] rounded-full bg-[#ead8a8]/20 blur-3xl"
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          {/* Heading reveal */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.3,
+            }}
+            variants={whySfhContainer}
+            className="mb-10 text-center sm:mb-12"
+          >
+            <motion.p
+              variants={whySfhItem}
+              className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b88932]"
+            >
               WHY SFH
-            </p>
+            </motion.p>
 
-            <h2 className="mt-3 font-[var(--font-playfair)] text-4xl font-semibold leading-[0.96] tracking-[-0.06em] text-[#111111] sm:text-5xl">
+            <motion.h2
+              variants={whySfhItem}
+              className="mt-3 font-[var(--font-playfair)] text-4xl font-semibold leading-[0.96] tracking-[-0.06em] text-[#111111] sm:text-5xl"
+            >
               Premium scent, personal energy.
-            </h2>
-          </div>
+            </motion.h2>
 
-          <div className="grid gap-5 md:grid-cols-3">
+            <motion.div
+              variants={whySfhItem}
+              className="mx-auto mt-5 h-px w-20 origin-center bg-[#b88932]"
+            />
+          </motion.div>
+
+          {/* Brand pillars */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.18,
+            }}
+            variants={whySfhContainer}
+            className="grid gap-5 md:grid-cols-3"
+          >
             {brandPillars.map((pillar) => (
-              <article
+              <motion.article
                 key={pillar.title}
-                className="rounded-[1.6rem] border border-[#efe5d5] bg-[#faf8f3] p-6 shadow-[0_12px_28px_rgba(17,17,17,0.02)]"
+                variants={whySfhItem}
+                whileHover={{
+                  y: -8,
+                  scale: 1.015,
+                }}
+                transition={{
+                  duration: 0.35,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="group relative overflow-hidden rounded-[1.6rem] border border-[#efe5d5] bg-[#faf8f3] p-6 shadow-[0_12px_28px_rgba(17,17,17,0.025)] transition-shadow duration-500 hover:border-[#dfc78f] hover:shadow-[0_28px_60px_rgba(17,17,17,0.10)] sm:p-7"
               >
-                <div
-                  className="mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-[#ead8a8] bg-[#f3e7ca]"
+                {/* Subtle luxury shine */}
+                <motion.div
+                  initial={{
+                    x: "-120%",
+                    opacity: 0,
+                  }}
+                  whileHover={{
+                    x: "120%",
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: 0.85,
+                    ease: "easeInOut",
+                  }}
+                  className="pointer-events-none absolute inset-y-0 left-0 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/45 to-transparent"
+                />
+
+                <motion.div
+                  variants={whySfhIcon}
+                  whileHover={{
+                    rotate: 8,
+                    scale: 1.08,
+                  }}
+                  className="relative mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[#ead8a8] bg-[#f3e7ca]"
                   aria-hidden="true"
                 >
-                  <div className="h-3 w-3 rounded-full bg-[#b88932]" />
-                </div>
+                  <div className="h-3 w-3 rounded-full bg-[#b88932] shadow-[0_0_18px_rgba(184,137,50,0.35)]" />
+                </motion.div>
 
-                <h3 className="text-2xl font-semibold text-[#111111]">
+                <motion.h3
+                  initial={{
+                    opacity: 0,
+                    x: -15,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    x: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.15,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="relative text-2xl font-semibold text-[#111111]"
+                >
                   {pillar.title}
-                </h3>
+                </motion.h3>
 
-                <p className="mt-3 text-base leading-7 text-[#4d4d4d]">
+                <motion.p
+                  initial={{
+                    opacity: 0,
+                    y: 12,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.25,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="relative mt-3 text-base leading-7 text-[#4d4d4d]"
+                >
                   {pillar.text}
-                </p>
-              </article>
+                </motion.p>
+
+                {/* Gold bottom reveal */}
+                <motion.div
+                  initial={{
+                    scaleX: 0,
+                    opacity: 0,
+                  }}
+                  whileInView={{
+                    scaleX: 1,
+                    opacity: 1,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.35,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="relative mt-7 h-px w-full origin-left bg-[#b88932]/60"
+                />
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -789,119 +998,32 @@ export default function HomePage() {
           FINAL CTA
       ====================================================== */}
 
-      <section className="relative overflow-hidden bg-[#111111] py-20 text-white sm:py-24">
-        {/* Soft gold atmosphere */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.55 }}
-          whileInView={{ opacity: 0.22, scale: 1 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#b88932]/20 blur-3xl"
-        />
+      <section className="bg-[#111111] py-16 text-white sm:py-20">
+        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#d9bf7f]">
+            CRAFTED IN HEAVEN. WORN BY LEGENDS.
+          </p>
 
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none absolute left-1/2 top-0 h-px w-full max-w-3xl origin-center -translate-x-1/2 bg-gradient-to-r from-transparent via-[#b88932]/70 to-transparent"
-        />
+          <h2 className="mt-4 font-[var(--font-playfair)] text-4xl font-semibold leading-[0.96] tracking-[-0.06em] text-white sm:text-5xl">
+            Your next signature scent is waiting.
+          </h2>
 
-        <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.16 } },
-            }}
-          >
-            <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 24 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-                },
-              }}
-              className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#d9bf7f]"
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link
+              href="/shop"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#faf8f3] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#111111] transition-all duration-200 hover:-translate-y-0.5"
             >
-              CRAFTED IN HEAVEN. WORN BY LEGENDS.
-            </motion.p>
+              SHOP NOW
+              <ArrowRight size={16} />
+            </Link>
 
-            <motion.h2
-              variants={{
-                hidden: { opacity: 0, y: 55, scale: 0.96 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
-                },
-              }}
-              className="mt-5 font-[var(--font-playfair)] text-4xl font-semibold leading-[0.96] tracking-[-0.06em] text-white sm:text-5xl"
+            <Link
+              href="/fragrance-finder"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-transparent px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-all duration-200 hover:border-[#d9bf7f] hover:text-[#d9bf7f]"
             >
-              Your next signature scent is waiting.
-            </motion.h2>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, scaleX: 0 },
-                visible: {
-                  opacity: 1,
-                  scaleX: 1,
-                  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-                },
-              }}
-              className="mx-auto mt-6 h-px w-20 origin-center bg-[#b88932]"
-            />
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 25 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-                },
-              }}
-              className="mt-9 flex flex-wrap justify-center gap-4"
-            >
-              <motion.div
-                whileHover={{ y: -5, scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Link
-                  href="/shop"
-                  className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[#faf8f3] px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#111111] shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition-shadow duration-300 hover:shadow-[0_20px_45px_rgba(184,137,50,0.18)]"
-                >
-                  <span className="relative z-10">SHOP NOW</span>
-                  <ArrowRight
-                    size={16}
-                    className="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                  <span className="absolute inset-0 -translate-x-full bg-[#ead8a8]/50 transition-transform duration-500 group-hover:translate-x-0" />
-                </Link>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ y: -5, scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Link
-                  href="/fragrance-finder"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/[0.03] px-7 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm transition-all duration-300 hover:border-[#d9bf7f] hover:bg-white/[0.07] hover:text-[#d9bf7f]"
-                >
-                  FIND MY SCENT
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#d9bf7f] opacity-70 transition-transform duration-300 group-hover:scale-150" />
-                </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+              FIND MY SCENT
+            </Link>
+          </div>
         </div>
       </section>
     </>
