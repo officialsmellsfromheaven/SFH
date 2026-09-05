@@ -692,17 +692,35 @@ export default function ProductPage() {
                 </div>
               </div>
 
-              {/* CTAs */}
-              <div className="mb-5 flex flex-col gap-3 sm:flex-row">
+              {/* CTAs — scrapbook-style primary action */}
+              <div className="relative mb-5">
+                <div
+                  className="absolute -top-3 left-7 z-10 rotate-[-2deg] bg-[#fff6c9]/90 px-3 py-1 text-[16px] text-[#6f6339] shadow-[2px_3px_8px_rgba(70,50,20,0.08)]"
+                  style={{ fontFamily: '"CaveatLocal", cursive' }}
+                >
+                  ready to come home? ✦
+                </div>
+
                 <Button
                   onClick={handleCheckoutNow}
                   variant="primary"
                   size="lg"
-                  className="flex-1"
+                  className="group relative flex min-h-[58px] w-full flex-1 items-center justify-center gap-3 overflow-hidden !rounded-2xl !border-2 !border-[#8f6724] !bg-[#b88932] !px-6 !py-4 !text-white shadow-[0_6px_0_#8f6724,0_12px_22px_rgba(28,37,64,0.12)] transition-all duration-300 hover:-translate-y-1 hover:!bg-[#c7963c] hover:shadow-[0_8px_0_#8f6724,0_16px_28px_rgba(28,37,64,0.15)] active:translate-y-[2px] active:shadow-[0_3px_0_#8f6724,0_7px_14px_rgba(28,37,64,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b88932]/50 focus-visible:ring-offset-2"
                   aria-label="Add to Cart"
                 >
-                  <ShoppingBag size={18} />
-                  <span>Add to Cart</span>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 rotate-12 bg-white/20 blur-md transition-transform duration-700 group-hover:translate-x-[430%]"
+                  />
+                  <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/25">
+                    <ShoppingBag size={17} strokeWidth={2.2} />
+                  </span>
+                  <span className="relative text-sm font-extrabold tracking-[0.02em] sm:text-[15px]">
+                    Add to Cart
+                  </span>
+                  <span className="relative hidden rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] sm:inline-flex">
+                    {formatPrice(price)}
+                  </span>
                 </Button>
               </div>
 
